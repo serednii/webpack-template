@@ -1,0 +1,42 @@
+.btn {
+    width: 158px;
+    height: 35px;
+    background-color: $buttonFon;
+    color: white;
+    @extend%Century-400;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 35px;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color $hoverTime, font-weight $hoverTime;
+    -webkit-transition: background-color $hoverTime, font-weight $hoverTime;
+    -moz-transition: background-color $hoverTime, font-weight $hoverTime;
+    -ms-transition: background-color $hoverTime, font-weight $hoverTime;
+    -o-transition: background-color $hoverTime, font-weight $hoverTime;
+}
+
+.btn:hover {
+    background-color: $hoverButtonFon;
+    @extend %Century-700;
+}
+
+.btn-blue {
+    background-color: #14B1F0;
+    font-size: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+
+}
+
+.btn-blue:hover {
+    background-color: #034E53;
+    font-weight: 700;
+}

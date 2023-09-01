@@ -1,0 +1,154 @@
+//card
+.cards {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 186px);
+    gap: 20px;
+
+    .heart_wrap {
+        right: 10px;
+    }
+
+    .card {
+        @extend %Century-400;
+        font-size: 15px;
+        line-height: 1.2;
+        width: 192px;
+        min-height: 287px;
+        border: 1px solid rgb(0, 0, 0, 0.13);
+        padding: 14px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(115.36deg, #FFFFFF -1.31%, #FFFFFF 45.48%, #FFFFFF 45.49%, #FFFFFF 45.5%, var(--c1, #ffffff) 46.85%, var(--c2, #ffffff) 98.52%);
+        transition: box-shadow $hoverTime, border-radius $hoverTime, --c1 $hoverTime, --c2 $hoverTime;
+        -webkit-transition: box-shadow $hoverTime, border-radius $hoverTime, --c1 $hoverTime, --c2 $hoverTime;
+        -moz-transition: box-shadow $hoverTime, border-radius $hoverTime, --c1 $hoverTime, --c2 $hoverTime;
+        -ms-transition: box-shadow $hoverTime, border-radius $hoverTime, --c1 $hoverTime, --c2 $hoverTime;
+        -o-transition: box-shadow $hoverTime, border-radius $hoverTime, --c1 $hoverTime, --c2 $hoverTime;
+
+        &:hover {
+            background: linear-gradient(115.36deg, #FFFFFF -1.31%, #FFFFFF 45.48%, #FFFFFF 45.49%, #FFFFFF 45.5%, #F7F7F7 46.85%, #F3F3F3 98.52%);
+            box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.23);
+            border-radius: 6px;
+
+            .card__hover {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        &__hover {
+            width: 160px;
+            height: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            position: absolute;
+            bottom: 80px;
+            left: 14px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity $hoverTime;
+
+
+            &>button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 0;
+                width: 80px;
+                height: 26px;
+                background-color: #E4FDFF;
+                cursor: pointer;
+                transition: color $hoverTime, background-color $hoverTime;
+                -webkit-transition: color $hoverTime, background-color $hoverTime;
+                -moz-transition: color $hoverTime, background-color $hoverTime;
+                -ms-transition: color $hoverTime, background-color $hoverTime;
+                -o-transition: color $hoverTime, background-color $hoverTime;
+
+                .svg__view path {
+                    transition: stroke $hoverTime;
+                    -webkit-transition: stroke $hoverTime;
+                    -moz-transition: stroke $hoverTime;
+                    -ms-transition: stroke $hoverTime;
+                    -o-transition: stroke $hoverTime;
+                }
+
+                .svg__heart path {
+                    transition: fill $hoverTime;
+                    -webkit-transition: fill $hoverTime;
+                    -moz-transition: fill $hoverTime;
+                    -ms-transition: fill $hoverTime;
+                    -o-transition: fill $hoverTime;
+                }
+
+            }
+
+            &>button:hover {
+                color: white;
+                background-color: #034E53;
+
+                .svg__view path {
+                    stroke: white;
+                }
+
+                .svg__heart path {
+                    fill: #E03B3B;
+                }
+            }
+
+            &-text {
+                margin-right: 6px;
+            }
+        }
+
+        &__title {
+            font-size: 12px;
+            color: black;
+            font-weight: inherit;
+            margin-bottom: 11px;
+        }
+
+        &__name {
+            display: inline-block;
+            color: #034E53;
+            margin-bottom: 11px;
+            letter-spacing: 0.5;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        &__img-wrapper {
+            width: 158px;
+            min-height: 159px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 13px;
+
+            img {
+                max-width: 158px;
+                max-height: 159px;
+                object-fit: cover;
+            }
+        }
+
+        &__price {
+            color: #0AAEB9;
+            margin-bottom: 11px;
+
+            s {
+                color: #697475;
+                margin-right: 8px;
+            }
+
+        }
+
+
+    }
+}

@@ -1,0 +1,43 @@
+.logo {
+    margin: 0 auto;
+    padding-top: 5px;
+
+    a {
+        display: flex;
+        align-items: center;
+        transition: color $hoverTime;
+
+        img,
+        span {
+            display: inline-block;
+        }
+
+        svg {
+            margin-right: 5px;
+
+        }
+
+
+        path {
+            transition: stroke $hoverTime;
+        }
+
+        circle {
+            transition: fill $hoverTime;
+        }
+
+    }
+
+    a:hover {
+        color: $openHoverDropDownMenuText;
+
+        path {
+            stroke: $openHoverDropDownMenuText;
+
+        }
+
+        circle {
+            fill: $openHoverDropDownMenuText;
+        }
+    }
+}

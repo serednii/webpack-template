@@ -1,0 +1,148 @@
+.our_products {
+
+    padding-left: 55px;
+    padding-right: 55px;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 465px auto;
+        gap: 55px;
+        color: black;
+        font-size: 20px;
+        line-height: 28px;
+
+        text-transform: capitalize;
+    }
+
+
+    // offer
+    &__offer {}
+
+
+
+    &__offer_card {
+        width: 465px;
+        min-height: 575px;
+        background-color: #FBF7F7;
+        padding: 20px;
+    }
+
+    &__offer_img_parent {
+        width: 425px;
+        height: 425px;
+        background-color: white;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+
+
+    &__offer_img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    &__offer_text {
+        position: absolute;
+    }
+
+
+    &__offer_save {
+        position: absolute;
+        right: -20px;
+        top: 0;
+        width: 115px;
+        height: 111px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        background-color: #EECFCC;
+
+        span {
+            position: absolute;
+            left: 50%;
+            width: 50px;
+            top: 50%;
+            line-height: 1.2;
+            transform: translate(-60%, -50%);
+            -webkit-transform: translate(-60%, -50%);
+            -moz-transform: translate(-60%, -50%);
+            -ms-transform: translate(-60%, -50%);
+            -o-transform: translate(-60%, -50%);
+            color: black;
+            font-size: 28px;
+        }
+    }
+
+    &__offer_name {}
+
+    &__offer_price__parent {}
+
+    &__offer_new-price {
+        color: #D22727;
+        margin-right: 10px;
+    }
+
+    &__offer_old_price {
+        font-size: 16px;
+    }
+
+    &__offer_statistic {
+        color: #0AAEB9;
+
+        p {
+            display: inline-block;
+
+            span {
+                margin-left: 5px;
+            }
+
+        }
+
+        p:first-child {
+            margin-right: 25px;
+        }
+
+
+        &__offer_sold {}
+
+        &__offer_avaliable {}
+
+    }
+
+
+    // cards
+    &__cards {}
+
+
+    &__cards_parent {}
+
+    .cards {
+        gap: 5px;
+    }
+
+
+
+
+
+
+
+    // Large devices (desktops, less than 1200px)
+    @media (max-width: 1199.98px) {
+        &__offer {
+            display: none;
+        }
+
+        .our_products__wrapper {
+            grid-template-columns: initial;
+        }
+    }
+
+
+}

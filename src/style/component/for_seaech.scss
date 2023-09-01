@@ -1,0 +1,92 @@
+//form search
+.form-search {
+    background-color: transparent;
+    display: flex;
+
+
+
+    input {
+        width: 100%;
+        margin-left: -5px;
+        height: 40px;
+        // outline: transparent;
+        border: 0;
+        padding: 0 15px;
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+    }
+
+    position: relative;
+
+    hr {
+        position: absolute;
+        width: 1px;
+        height: 40px;
+        top: -8px;
+        left: 158px;
+    }
+
+    button {
+        width: 44px;
+        height: 40px;
+        border: 0;
+        margin: 0 0 0 -30px;
+        // outline: transparent;
+        background-color: #B6B6B6;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        cursor: pointer;
+        position: relative;
+
+        img {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            top: 8px;
+            left: 10px;
+        }
+
+        transition: background-color 0.2s ease-in;
+    }
+
+    button:hover {
+        background-color: darkgrey;
+    }
+
+}
+
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1399.98px) {
+    .form-search {
+        // width: calc(100vw / 2.6);
+    }
+
+    .form-search input {
+        // width: 24vw;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+
+    .form-search input {
+        // width: 39vw;
+    }
+}
+
+
+@media (max-width: 767.98px) {
+
+    .form-search input {
+        // width: 95%;
+    }
+}
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+
+    .form-search input {
+        // width: 48vw;
+    }
+}

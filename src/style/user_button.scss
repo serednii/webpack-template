@@ -1,0 +1,193 @@
+.user_button {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    z-index: 250;
+    background-color: #fff;
+    width: 358px;
+    height: 420px;
+
+
+    &_top {
+        display: flex;
+        position: relative;
+        gap: 18px;
+        height: 97px;
+        background-color: #0E3B3E;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 0px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+        padding-left: 20px;
+    }
+
+    &_btn__close {
+        position: absolute;
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        left: 329px;
+        top: 5px;
+
+        path {
+            transition: stroke $hoverTime;
+            -webkit-transition: stroke $hoverTime;
+            -moz-transition: stroke $hoverTime;
+            -ms-transition: stroke $hoverTime;
+            -o-transition: stroke $hoverTime;
+        }
+    }
+
+    &_btn__close:hover {
+        cursor: pointer;
+
+        path {
+            stroke: red;
+        }
+    }
+
+    &_top__foto {
+        display: flex;
+        width: 69px;
+        height: 69px;
+
+        img {
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            max-width: 69px;
+            max-height: 69px;
+            margin: auto;
+        }
+    }
+
+    &_top__text {
+        color: #fff;
+
+        .btn {
+            border-radius: 29px;
+            background-color: #fff;
+            color: #285A87;
+            font-size: 11px;
+            width: 76px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+        }
+    }
+
+    &_top__name {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    &_top__profile-description {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 15px;
+        margin-bottom: 5px;
+    }
+
+    &_information {
+        padding: 22px 56px;
+        color: #7A7A7A;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        a {
+            display: block;
+
+            span {
+                transition: color $hoverTime, font-weigh $hoverTime;
+                -webkit-transition: color $hoverTime, font-weigh $hoverTime;
+                -moz-transition: color $hoverTime, font-weigh $hoverTime;
+                -ms-transition: color $hoverTime, font-weigh $hoverTime;
+                -o-transition: color $hoverTime, font-weigh $hoverTime;
+            }
+
+            svg {
+                path {
+                    transition: stroke $hoverTime;
+                    -webkit-transition: stroke $hoverTime;
+                    -moz-transition: stroke $hoverTime;
+                    -ms-transition: stroke $hoverTime;
+                    -o-transition: stroke $hoverTime;
+                }
+            }
+        }
+
+        a:hover {
+            span {
+                color: #3D3C3C;
+                font-weight: 700;
+            }
+
+            svg {
+                path {
+                    stroke: #3D3C3C;
+                }
+            }
+        }
+
+        a:nth-child(2) {
+            margin-bottom: 4px;
+        }
+
+        hr {
+            width: 315px;
+            margin-left: -35px;
+        }
+
+        .link_2 {
+            margin-bottom: 5px;
+        }
+
+        svg {
+            margin-right: 21px;
+            transform: translateY(3px);
+            -webkit-transform: translateY(3px);
+            -moz-transform: translateY(3px);
+            -ms-transform: translateY(3px);
+            -o-transform: translateY(3px);
+        }
+
+        .link_1 {
+            line-height: 1px;
+        }
+
+        .line_1,
+        .line_2 {
+            margin-bottom: 13px;
+        }
+
+        .line_2,
+        .line_3 {
+            margin-top: 23px;
+        }
+
+        .line_1,
+        .line_2,
+        .line_3 {
+            border: 1px solid #E9E9E9;
+        }
+    }
+
+    &_sub-title {
+        font-weight: 400;
+        font-size: 14px;
+        color: #3C8CD6;
+    }
+}
+
+
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 360px) {
+    .user_button {
+        width: 95vw;
+    }
+}

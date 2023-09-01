@@ -1,0 +1,142 @@
+.new_arrivals__buttom {
+
+
+    margin-bottom: 20px;
+
+    &-title {
+        text-align: center;
+        padding: 0;
+        color: #000;
+        font-weight: 400;
+        font-size: 52px;
+        line-height: 64px;
+        margin-bottom: 22px;
+
+        span {
+            color: #00CAD7;
+            margin-right: 10px;
+
+        }
+    }
+
+    &-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background: linear-gradient(90deg, #525252 0%, #3D72B4 100%);
+        padding: 35px;
+        gap: 38px;
+    }
+
+    &-card {
+        position: relative;
+        width: 405px;
+        height: 423px;
+        background-color: #fff;
+    }
+
+    &-card:nth-child(2) {
+        .new_arrivals__buttom-card__sale {
+            background: linear-gradient(90deg, #00BF8F 0%, #001510 100%);
+        }
+    }
+
+    &-card:nth-child(3) {
+        .new_arrivals__buttom-card__sale {
+            background: linear-gradient(90deg, #50C9C3 0%, #96DEDA 100%);
+        }
+    }
+
+    &-card__sale {
+        position: absolute;
+        border-radius: 83px;
+        background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%);
+        -webkit-border-radius: 83px;
+        -moz-border-radius: 83px;
+        -ms-border-radius: 83px;
+        -o-border-radius: 83px;
+        width: 150px;
+        height: 143px;
+        top: 23px;
+        left: 244px;
+
+        span {
+            position: absolute;
+            top: 27px;
+            left: 30px;
+            font-weight: 400;
+            font-size: 36px;
+            line-height: 44.14px;
+            color: #fff;
+
+
+        }
+    }
+
+    &-img_wrapper {}
+
+    img {
+        width: 230px;
+        height: 284px;
+    }
+
+    &-card_text {
+        line-height: 32px;
+        margin-left: 23px;
+    }
+
+    &-card__name {
+        color: #000000;
+        font-size: 20px;
+    }
+
+    &-card__newprise {
+        color: #D22727;
+        font-size: 27px;
+    }
+
+    &-card__oldprise {
+        color: #000000;
+        font-size: 19px;
+    }
+
+    &-card__already {
+        color: #0AAEB9;
+        font-size: 19px;
+
+    }
+
+    &-card__available {
+        color: #0AAEB9;
+        font-size: 19px;
+
+    }
+}
+
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+
+    .new_arrivals__buttom-title {
+        font-size: 35px;
+        line-height: 52px;
+    }
+
+    .new_arrivals__buttom-card__sale {
+        width: 100px;
+        height: 100px;
+        top: 15px;
+        left: 15px;
+
+        span {
+            top: 21px;
+            left: 23px;
+            font-size: 25px;
+            line-height: 29.14px;
+        }
+    }
+
+    .new_arrivals__buttom-card {
+        height: auto;
+    }
+}

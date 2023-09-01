@@ -1,0 +1,83 @@
+$back: rgb(41, 41, 9);
+$text: rgb(212, 166, 166);
+$fon: #f6f6f6;
+
+$hoverTime: 0.3s ease-in-out;
+
+//Головне меню
+$menuFon: #0E3B3E;
+$dropDownMenuText: #ffffff;
+$hoverDropDownMenuText: #14b1f0;
+
+// випадаюче меню 
+$openMenuFon: #03484c;
+$openDropDownMenuText: #ffffff;
+$openHoverDropDownMenuText: #0aaeb9;
+
+//випадаюче підменю
+$subMenuFon: #0e3b3e;
+$subDropDownMenuText: #0aaeb9;
+$subMenuText: #ffffff;
+$hoverSubDropDownMenuText: #ffffff;
+$hoverSubMenuText: #060606;
+
+//Button
+$buttonFon: #15ADB7;
+$hoverButtonFon: #034E53;
+
+//footer top
+$footerTopFon: #393939;
+$FooterTopTitleText: #00CAD7;
+$footerTopLinks: #ffffff;
+$footerTopLinksHover: #0aaeb9;
+
+//footer bottom
+$footerBottomFon: #161616;
+$FooterBottomText: #ffffff;
+
+
+// -------------------------------------------------------
+
+%Montserrat-400 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+// -------------------------------------------------------
+%Roboto-300 {
+    font-family: 'Roboto-Light';
+    font-weight: 300;
+}
+
+
+%Roboto-400 {
+    font-family: 'Roboto-Regular';
+    font-weight: 400;
+}
+
+%Roboto-700 {
+    font-family: 'Roboto-Bold';
+    font-weight: 700;
+}
+
+// -------------------------------------------------------
+
+%Trebuchet-400 {
+    font-family: 'Trebuchet MS Regular1';
+    font-weight: 400;
+}
+
+// -------------------------------------------------------
+%Century-400 {
+    font-family: 'Century Gothic Regular';
+    font-weight: 400;
+}
+
+%Century-700 {
+    font-family: 'Century Gothic Regular';
+    font-weight: 700;
+}
+
+
+
+// -------------------------------------------------------

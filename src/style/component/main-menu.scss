@@ -1,0 +1,156 @@
+//main-menu
+.main-menu {
+
+    &__wrapper {
+        display: flex;
+        font-family: "Century Gothic Regular";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        color: $dropDownMenuText;
+    }
+
+    //main-menu-icon
+    &__icon {
+        position: relative;
+        font-size: 17px;
+        transform: translateY(-2px);
+        -webkit-transform: translateY(-2px);
+        -moz-transform: translateY(-2px);
+        -ms-transform: translateY(-2px);
+        -o-transform: translateY(-2px);
+
+        .main-menu__icon-wrapper {
+            //background-color: #14B1F0;
+            display: inline-block;
+            width: 18px;
+            height: 16px;
+            margin-right: 5px;
+            transform: translateY(3px);
+            -webkit-transform: translateY(3px);
+            -moz-transform: translateY(3px);
+            -ms-transform: translateY(3px);
+            -o-transform: translateY(3px);
+            position: relative;
+
+        }
+
+        .main-menu__icon-line {
+            position: absolute;
+            display: block;
+            width: 18px;
+            height: 2px;
+            background-color: #fff;
+
+        }
+
+        .main-menu__icon-line:nth-child(1) {
+            top: -2px;
+        }
+
+        .main-menu__icon-line:nth-child(2) {
+            top: 6px;
+        }
+
+        .main-menu__icon-line:nth-child(3) {
+            top: 14px;
+        }
+
+
+        .open-burger {
+            .main-menu__icon-line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .main-menu__icon-line:nth-child(1) {
+                transform: rotate(45deg);
+                top: 6px;
+            }
+
+            .main-menu__icon-line:nth-child(3) {
+                top: 6px;
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+            }
+
+            display: inline-block;
+
+        }
+
+        .main-menu__icon-wrapper:hover {
+            .line-burger {
+                background-color: $hoverDropDownMenuText;
+            }
+        }
+
+
+
+
+        a {
+            span {
+                transition: color $hoverTime;
+                -webkit-transition: color $hoverTime;
+                -moz-transition: color $hoverTime;
+                -ms-transition: color $hoverTime;
+                -o-transition: color $hoverTime;
+            }
+
+            .line-burger {
+                transition: background-color $hoverTime ;
+                -webkit-transition: background-color $hoverTime ;
+                -moz-transition: background-color $hoverTime ;
+                -ms-transition: background-color $hoverTime ;
+                -o-transition: background-color $hoverTime ;
+            }
+        }
+
+
+        a:hover {
+            span {
+                color: $hoverDropDownMenuText;
+            }
+
+            .line-burger {
+                background-color: $hoverDropDownMenuText;
+            }
+        }
+
+
+
+        margin-right: 20px;
+    }
+
+    //main-memu memu
+
+    &__menu {
+        display: flex;
+        align-items: center;
+
+    }
+
+    &__items {
+        display: flex;
+    }
+
+    &__item {
+        a {
+            transition: color $hoverTime;
+            -webkit-transition: color $hoverTime;
+            -moz-transition: color $hoverTime;
+            -ms-transition: color $hoverTime;
+            -o-transition: color $hoverTime;
+        }
+
+        a:hover {
+            color: $hoverDropDownMenuText;
+        }
+
+    }
+
+    &__item+&__item {
+        margin-left: 36px;
+    }
+}

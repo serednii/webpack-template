@@ -1,0 +1,34 @@
+//heart
+.heart_wrap {
+    position: absolute;
+    top: 38px;
+    right: 10px;
+    z-index: 9;
+
+    svg {
+        path {
+            transition: stroke $hoverTime;
+        }
+    }
+
+    svg:hover {
+        path {
+            stroke: rgb(139, 59, 59);
+        }
+    }
+
+
+}
+
+.heart_wrap.add_card {
+
+    svg {
+
+        path {
+
+            fill: rgb(251, 3, 3);
+        }
+    }
+
+
+}

@@ -1,0 +1,313 @@
+.header {
+    z-index: 100;
+    position: fixed;
+    max-width: 1420px;
+    width: 100%;
+    top: 0px;
+}
+
+.header__top {
+    font-family: "Century Gothic Regular";
+    font-weight: 400;
+    width: 100%;
+    height: 68px;
+    background-color: #03484D;
+    color: white;
+    display: grid;
+    grid-template-columns: minmax(100px, 260px) minmax(315px, 540px) minmax(285px, 600px);
+
+    .main-menu__icon {
+        display: none;
+    }
+
+    &-search {
+        margin-top: 16px;
+    }
+
+    &-links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        // display: grid;
+        // grid-template-columns: auto auto auto;
+        img {
+            display: inline;
+        }
+
+        a {
+            display: flex;
+            transition: color $hoverTime;
+
+            svg {
+                path {
+                    transition: fill $hoverTime, stroke $hoverTime;
+                }
+            }
+        }
+
+        // a:not(:last-child) {
+        //     flex-basis: 130px;
+        // }
+        a:hover {
+            color: #14B1F0;
+
+            svg {
+                path {
+                    fill: #14B1F0;
+                    stroke: #14B1F0;
+                }
+            }
+        }
+
+        // Delivery & Orders
+        .header__delivery {
+            font-size: 10px;
+
+            .orders {
+                font-size: 11px;
+            }
+
+            a {}
+
+            a span {
+                line-height: 1.6;
+            }
+
+            a:not(last-child) {
+                margin-bottom: 4px;
+            }
+
+            svg {
+                margin-right: 4px;
+            }
+
+            .user:hover {
+                svg {
+                    path {
+                        stroke: #14B1F0;
+                        fill: #03484D !important;
+                    }
+                }
+
+                // .a:not(last-child) {
+                //     color: #14B1F0;
+                // }
+            }
+        }
+
+        // Contact
+        .header_contact {
+            a {
+                font-size: 13px;
+            }
+
+            a:not(last-child) {
+                margin-bottom: 4px;
+            }
+
+            a img {
+                margin-right: 4px;
+            }
+
+            span a {
+                display: inline-block;
+            }
+        }
+
+        .header__user {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 135px;
+            position: relative;
+            margin-right: 30px;
+
+            a {
+                width: 20px;
+                height: 20px;
+            }
+
+            a:last-child {
+                margin-right: 10px;
+            }
+
+            .heart .number {
+                position: absolute;
+                top: -16px;
+                right: 7px;
+            }
+
+            .cart .number {
+                position: absolute;
+                top: -14px;
+                right: 7px;
+            }
+
+            .cart,
+            .heart {
+                position: relative;
+            }
+
+            a svg {
+                margin-right: 2px;
+            }
+        }
+
+        // Users
+    }
+}
+
+.header__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    background-color: $menuFon;
+    height: 50px;
+}
+
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1430px) {
+    .header {
+        width: calc(100vw - 10px);
+    }
+}
+
+@media (max-width: 1399.98px) {
+    .header__top-links .header__user {
+        width: calc(100vw / 10.37);
+    }
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+    .header__top-search {
+
+        .form-search {
+            // width: auto;
+        }
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+    .header__top {
+
+        grid-template-columns: 1fr 3fr 1fr;
+
+
+        .logo__shop-up {
+            display: none;
+        }
+    }
+
+    .header__top-links .header__user {
+        // width: 137px
+    }
+
+    .header__top .header__top-links {
+
+        .header_contact,
+        .header__delivery {
+            display: none;
+        }
+    }
+
+    .header__bottom {
+        .social {
+            display: none;
+        }
+    }
+
+    .main-menu__item+.main-menu__item {
+        margin-left: 19px;
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .header__top {
+        // grid-template-columns: minmax(125px, 260px) minmax(315px, 540px) minmax(155px, 600px);
+        grid-template-columns: 40px 1.3fr 3fr 1fr !important;
+
+        .form-search {
+            width: 100%;
+        }
+
+
+        .main-menu__icon {
+            display: flex;
+            margin-right: 0;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .header__top-search {
+
+            select,
+            hr {
+                display: none;
+            }
+
+
+            input {
+                border-bottom-left-radius: 6px;
+                border-top-left-radius: 6px;
+            }
+        }
+    }
+
+    .header__bottom {
+
+        display: none;
+
+    }
+
+    .header__top {
+
+        .header__user {
+
+            .user,
+            .heart {
+                display: none;
+            }
+        }
+    }
+}
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .header__top {
+        .logo a svg {
+            width: 50px;
+            margin-right: 13px;
+        }
+
+        .header__top-search {
+
+
+            button {
+                display: none;
+            }
+
+            input {
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+        }
+
+        .header__top-links {
+            .header__user {
+                margin-right: 0;
+
+                .cart {
+                    .text {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

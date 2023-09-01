@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vscode/
+package-lock.json/
+src/images_2/
+src/images_3/
+src/json/
+src/json_shop/
+images/

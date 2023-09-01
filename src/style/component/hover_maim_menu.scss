@@ -1,0 +1,287 @@
+// Випадаюче меню першого рівня
+.hover_maim_menu {
+    background-color: $openMenuFon;
+    margin-bottom: 25px;
+    padding: 0 10px 0 10px;
+    max-width: 450px;
+    position: absolute;
+    top: -900px;
+    // top: 118px;
+    left: 0;
+    z-index: 20;
+    transition: top $hoverTime;
+
+    &__links {
+        max-width: 450px;
+    }
+
+    .main-menu__menu {
+        display: none;
+    }
+
+    .menu_circle_close {
+        position: absolute;
+        top: 7px;
+        right: 40px;
+
+    }
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: minmax(800px, 1035px) 150px;
+        justify-content: space-between;
+
+        padding-bottom: 25px;
+
+
+        .header__top-links {
+            display: none;
+        }
+    }
+
+    &__links_opened {
+
+        &__items {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            position: relative;
+            margin-right: 8px;
+        }
+
+        &__item {
+            position: relative;
+            cursor: pointer;
+
+
+
+            .hover_sub_menu {
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility $hoverTime ;
+                z-index: -10;
+                height: 0;
+            }
+
+            .arrow {
+                top: 5px;
+                right: 8px;
+                margin-right: 15px;
+            }
+
+        }
+
+        &__link {
+            position: relative;
+            font-size: 13px;
+            line-height: 25px;
+            padding: 0 22px 0 6px;
+            color: white;
+            transition: color $hoverTime;
+            -webkit-transition: color $hoverTime;
+            -moz-transition: color $hoverTime;
+            -ms-transition: color $hoverTime;
+            -o-transition: color $hoverTime;
+        }
+
+        .hover_maim_menu__links_opened__link {
+            line-height: 2;
+            display: block;
+
+        }
+
+        &__item:hover {
+
+            .hover_maim_menu__links_opened__link {
+                color: $hoverSubMenuText;
+            }
+
+            .hover_sub_menu {
+                z-index: 8;
+                visibility: visible;
+                opacity: 1;
+                height: auto;
+            }
+        }
+    }
+
+
+    &__links {}
+
+    &__links_not_opened {
+        &__items {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        &__item {
+            margin-right: 32px;
+            padding: 0 12px 0 6px;
+        }
+
+
+
+        &__item:hover {
+            .hover_maim_menu__links_not_opened__link {
+                color: $hoverSubMenuText;
+            }
+        }
+
+        &__link {
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 25px;
+            color: white;
+            transition: color $hoverTime;
+            -webkit-transition: color $hoverTime;
+            -moz-transition: color $hoverTime;
+            -ms-transition: color $hoverTime;
+            -o-transition: color $hoverTime;
+        }
+    }
+
+    &__help_seting {
+
+        &__title {
+            color: #14B1F0;
+            line-height: 53px;
+        }
+
+        &__link {
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 33px;
+            color: white;
+            transition: color $hoverTime;
+            -webkit-transition: color $hoverTime;
+            -moz-transition: color $hoverTime;
+            -ms-transition: color $hoverTime;
+            -o-transition: color $hoverTime;
+        }
+
+        &__link:hover {
+            color: $hoverSubMenuText;
+        }
+    }
+}
+
+.hover_maim_menu.open-burger {
+    top: 98px;
+    overflow-x: hidden;
+}
+
+
+
+
+// X-Large devices (large desktops, less than 1400px)
+
+@media (max-width: 1430px) {
+    .hover_maim_menu {
+        padding-right: 10px;
+        padding-left: 10px;
+
+        .menu_circle_close {
+            right: 20px;
+        }
+    }
+
+}
+
+@media (max-width: 1410px) {
+
+    .hover_maim_menu {
+        // width: 50%;
+    }
+}
+
+@media (max-width: 1399.98px) {
+
+    .hover_maim_menu__links_opened__items {
+        flex-direction: column;
+    }
+
+    .hover_maim_menu__links_opened,
+    .hover_maim_menu__links_not_opened {
+        border-bottom: 1px solid rgb(12, 202, 66);
+        margin-bottom: 10px;
+    }
+
+    .hover_maim_menu__links_not_opened__items {
+        display: block;
+    }
+
+
+
+    .hover_maim_menu__links_not_opened__link {
+        line-height: 1.7;
+    }
+
+    .hover_maim_menu__links_opened__item .arrow {
+        margin-right: 15px;
+    }
+
+    .hover_maim_menu__help_seting__title {
+        line-height: 27px;
+    }
+
+    .header__bottom {
+        // padding: 0 20px;
+    }
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+    .hover_maim_menu .main-menu__menu {
+        display: block;
+        color: white;
+        border-bottom: 1px solid rgb(12, 202, 66);
+        margin-bottom: 10px;
+
+        .main-menu__items {
+            display: block;
+        }
+
+        .main-menu__item {
+            margin-left: 0;
+        }
+    }
+
+    .hover_maim_menu__wrapper {
+        .header__top-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            color: white;
+            border-bottom: 1px solid rgb(12, 202, 66);
+            margin-bottom: 10px;
+
+            .header__user {
+                width: 100px;
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .hover_maim_menu.open-burger {
+        display: inline-block;
+        width: 320px;
+        top: 49px;
+    }
+
+    .hover_maim_menu__links {
+        width: 300px;
+    }
+}
+
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .hover_maim_menu {}
+}

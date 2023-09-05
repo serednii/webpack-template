@@ -1,4 +1,4 @@
-import { transformData, getZaprosAll } from "../fetch/fetch";
+import { transformData, getQueryAll } from "../fetch/fetch";
 import convertObjectToInArray from "../function/convertObjectToInArray";
 import { PRODUCTHTML, CATALOGHTML, urlJsonServer } from '../GlobalVariable';
 // import printBreadCrumbs from '../function/print_bead_crumbs.js'
@@ -12,7 +12,7 @@ async function searchCatalogCreateCard(searchText) {
     // async function searchCatalogCreateCard(searchText, dataGlobalJson) {
     if (!(searchText === "")) {
 
-        const result = transformData(await getZaprosAll(urlJsonServer + 'shop/', searchText))
+        const result = transformData(await getQueryAll(urlJsonServer + 'shop/', searchText))
         // console.log(result.json())
         printCard(result, '.catalog_product-grid-search');
     } else {

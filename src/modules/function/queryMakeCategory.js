@@ -1,5 +1,5 @@
 
-import { getZapros } from '../fetch/fetch';
+import { getQuery } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 
 //збираємо з бази даних категорії і формуємо JSON структуру
@@ -8,7 +8,7 @@ async function queryMakeCategory() {
 
     let newCategory = {};
 
-    let getQuery = await getZapros(urlJsonServer + 'shop/', '', [], '', 'limit=1000');
+    let getQuery = await getQuery(urlJsonServer + 'shop/', '', [], '', 'limit=1000');
     console.log(getQuery);
 
     // getQuery.forEach(e => console.log(e))

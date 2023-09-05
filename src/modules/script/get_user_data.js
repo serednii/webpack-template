@@ -35,7 +35,6 @@ document.querySelector('#signup-submit').onclick = function (event) {
         "birthday": document.querySelector('#signup-birthday').value,
     };
     ajax('core/update_user_data.php', 'POST', updateUserData, updateData);
-
 }
 
 function updateUserData(result) {

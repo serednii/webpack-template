@@ -7,7 +7,7 @@
 const COUNT_ELEMENTS = document.querySelector('.catalog_products__bottom-count');
 import { urlJsonServer } from '../GlobalVariable';
 import printCard from "../catalog/printCard";
-import { getZapros, transformData } from "../fetch/fetch";
+import { getQuery, transformData } from "../fetch/fetch";
 import convertObjectToInArray from "../function/convertObjectToInArray";
 
 COUNT_ELEMENTS && COUNT_ELEMENTS.addEventListener('change', (e) => countElementsChange(e));
@@ -20,7 +20,7 @@ async function countElementsChange() {
     const COUNT_INDEX = COUNT_ELEMENTS.selectedOptions[0].innerText;
     setCountLocalStorage(COUNT_INDEX);
     const catalogs = (SHOW_LIST.dataset.catalogs).split(' ');
-    const DATA_PRODUCTS = transformData(await getZapros(urlJsonServer + 'shop/', 'category', catalogs, 'rand()', 'limit=' + getCountLocalStorage()));
+    const DATA_PRODUCTS = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogs, 'rand()', 'limit=' + getCountLocalStorage()));
     console.log(DATA_PRODUCTS);
     printCard(convertObjectToInArray(DATA_PRODUCTS, new Array()), catalogs, '.search-product__off .catalog_product-grid');
 }

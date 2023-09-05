@@ -127,9 +127,50 @@
     line-height: 2.5;
     min-height: 2.5rem;
     z-index: 300;
-
-
     color: aliceblue;
     background-color: brown;
     text-align: center;
+}
+
+
+
+
+
+// table category select
+.table-category-select {
+    background-color: coral;
+    z-index: 1000;
+    position: relative;
+    padding: 20px;
+}
+
+.table-category-select_checkbox {
+    width: 50px;
+    height: 20px;
+}
+
+.table-category-select_title {
+    color: black;
+    font-size: 2rem;
+}
+
+.table-category-select_wrapper {
+    // width: 80%;
+    // margin-bottom: 20px;
+}
+
+table {
+    caption-side: top !important;
+    border-collapse: initial !important;
+}
+
+.table-category-select_key {
+    // width: 600px !important;
+}
+
+.table-category-select_value {
+    padding: 0 20px;
+    max-width: 808px;
+    width: 100%;
+    word-wrap: break-word;
 }

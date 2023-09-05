@@ -2,7 +2,7 @@ import { urlJsonServer } from '../GlobalVariable';
 import printBreadCrumbs from '../function/print_bead_crumbs';
 import printElementHtml from './printElementHtml';
 import { startSlider } from '../slider';
-import { getZapros, transformData } from '../fetch/fetch';
+import { getQuery, transformData } from '../fetch/fetch';
 async function productCreateCart(catalogs, product_id) {
     console.log(product_id)
     //Робимо запит в базу даних
@@ -11,7 +11,7 @@ async function productCreateCart(catalogs, product_id) {
     //     .then(response => response.json())
     //     .then(data => {
     // console.log(product_id)
-    let product = transformData(await getZapros(urlJsonServer + 'shop/', '', [product_id]));
+    let product = transformData(await getQuery(urlJsonServer + 'shop/', '', [product_id]));
     console.log(...product)
     product = product[0];
     console.log(catalogs)

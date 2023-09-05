@@ -5,7 +5,7 @@ class Query {
 
 import { urlJsonServer } from '../GlobalVariable';
 
-// export async function getZaprosFunction(url = "", type = "category", arrCatalogs = [], generateCards, classs, count) {
+// export async function  getQueryFunction(url = "", type = "category", arrCatalogs = [], generateCards, classs, count) {
 //     const urlSearch = url + allDataSearch(type, arrCatalogs)
 //     // console.log(urlSearch);
 //     fetch(urlSearch)
@@ -19,7 +19,7 @@ import { urlJsonServer } from '../GlobalVariable';
 //         })
 // }
 
-export async function getZapros(url = "", type = "", arrCatalogs = [], rand = '', limit = '') {
+export async function getQuery(url = "", type = "", arrCatalogs = [], rand = '', limit = '') {
     console.log(type);
     console.log(arrCatalogs);
     console.log(rand);
@@ -59,7 +59,7 @@ export async function getZapros(url = "", type = "", arrCatalogs = [], rand = ''
 
 
 
-// let getQuery = await getZaprosObj({
+// let getQuery = await  getQueryObj({
 //     url: urlJsonServer,
 //     table: "shop",
 //     search: `filter-category=Електроніка Гаджети Смартфони`,
@@ -71,7 +71,7 @@ export async function getZapros(url = "", type = "", arrCatalogs = [], rand = ''
 // });
 
 
-export async function getZaprosObj(url, table = '', search = '', rand = '', limit = '') {
+export async function getQueryObj(url, table = '', search = '', rand = '', limit = '') {
 
     const urlSearch = url + table + (search ? ('/' + search.replace(/ /ig, '+')) : "") + (rand ? ('/' + rand) : "") + (limit ? ('/' + limit) : "");
 
@@ -98,7 +98,7 @@ export async function getZaprosObj(url, table = '', search = '', rand = '', limi
 }
 
 
-export async function getZaprosAll(url = "", data = "") {
+export async function getQueryAll(url = "", data = "") {
     if (data === "") return {};
     const urlSearch = url + 'filter=' + data
     // const urlSearch = url + 'filter=' + data + '/limit=20'
@@ -122,7 +122,7 @@ export async function getZaprosAll(url = "", data = "") {
     //     })
 }
 
-// async function getZapros() {
+// async function  getQuery() {
 //     let rez = await fetch(urlJsonServer + 'shop/')
 //     rez = rez.json();
 //     // rez = transformData(rez);
@@ -203,11 +203,35 @@ export async function updateDataPost(url = '', data = {}) {
 }
 
 
+// //Всі дані в тому числі вложені приходять в JSON варіанті  
+// export async function postQuery(url = '', data = {}) {
+//     // Default options are marked with *
+//     console.log(url);
+//     // console.log(data);
+//     const response = await fetch(url, {
+//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//         mode: 'cors', // no-cors, *cors, same-origin
+//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//         credentials: 'same-origin', // include, *same-origin, omit
+//         headers: {
+//             'Content-Type': 'application/json'
+//             // 'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         redirect: 'follow', // manual, *follow, error
+//         referrerPolicy: 'no-referrer', // no-referrer, *client
+//         body: data // body data type must match "Content-Type" header
+//     });
+//     return await response.text(); // parses JSON response into native JavaScript objects
+// }
+
+
+
+
 
 export async function addDataPost(url = '', data = {}) {
     // Default options are marked with *
     console.log(url)
-    // console.log(data)
+    console.log(data)
     const response = await fetch(url, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin

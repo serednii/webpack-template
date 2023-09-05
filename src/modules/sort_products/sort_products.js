@@ -1,26 +1,27 @@
 const CATALOG_PRODUCT_FILTER_PARENT = document.querySelector('.catalog_product-filter_parent');
-import { getZapros, transformData, updateDataPost, addDataPost } from '../fetch/fetch';
+import { getQuery, transformData, updateDataPost, addDataPost } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 
 
 export async function createFormsSort(menuPatch) {
     try {
 
-        const PRODUCT = menuPatch[menuPatch.length - 1];
-        console.log(menuPatch[menuPatch.length - 1]);
+        const PRODUCT = menuPatch.join('---')
 
-        let categoryListFilter = await getZapros(urlJsonServer + 'shop_category_filter/', 'product_filters', [PRODUCT], '', '');
+        // console.log(PRODUCT);
 
-        console.log(categoryListFilter)
+        let categoryListFilter = await getQuery(urlJsonServer + 'shop_category_filter/', 'product_filters', [PRODUCT], '', '');
+
+        // console.log(categoryListFilter)
         if (categoryListFilter.data) {
             categoryListFilter = categoryListFilter.data[0];
             categoryListFilter.filter = JSON.parse(categoryListFilter.filter);
             categoryListFilter.id = categoryListFilter.id;
-            console.log(categoryListFilter.filter);
+            // console.log(categoryListFilter.filter);
             const listFilter = Object.keys(categoryListFilter.filter);
 
             listFilter.forEach(nameFilter => {
-                console.log(categoryListFilter.filter[nameFilter])
+                // console.log(categoryListFilter.filter[nameFilter])
                 if (categoryListFilter.filter[nameFilter][0] === 'checkbox') createFormSortCheckbox(nameFilter, categoryListFilter.filter[nameFilter], PRODUCT);
                 if (categoryListFilter.filter[nameFilter][0] === 'range') createFormSortRange(nameFilter, categoryListFilter.filter[nameFilter], PRODUCT);
             })
@@ -33,15 +34,15 @@ export async function createFormsSort(menuPatch) {
 
 function createFormSortCheckbox(nameFilter, menuPatch, product) {
     menuPatch.shift();
-    console.log(menuPatch)
-    console.log(product)
+    // console.log(menuPatch)
+    // console.log(product)
 
     let inputElementsCheckbox = '';
     menuPatch.forEach(e => {
         inputElementsCheckbox += `
         <div class="form-check">
         <input type="checkbox" class="form-check-input" 
-        name="option1" value="something" >
+        name="option1" value="${e}" >
         <label class="form-check-label" for="check1">${e}</label>
         </div>
         `
@@ -60,7 +61,7 @@ function createFormSortCheckbox(nameFilter, menuPatch, product) {
 
 function createFormSortRange(nameFilter, menuPatch, product) {
     menuPatch.shift();
-    console.log(menuPatch)
+    // console.log(menuPatch)
 
     const formFilter = `
     <div class="form-checked_parent range-wrap">

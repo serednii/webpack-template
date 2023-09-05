@@ -75,7 +75,7 @@ import catalogcreatecard from './modules/catalog/catalogCreateCard';
 import productCreateCart from './modules/product/product_create_cart';
 import { dataGlobalJson, count_elements } from './modules/GlobalVariable';
 import searchCatalogCreateCard from './modules/catalog/searchCatalogCreateCard';
-import { getZapros, getZaprosObj, transformData, updateDataPost, addDataPost, deletePost } from './modules/fetch/fetch';
+import { getQuery, getQueryObj, transformData, updateDataPost, addDataPost, deletePost } from './modules/fetch/fetch';
 import { getCountLocalStorage } from './modules/count_cards/count_cards';
 import './modules/sort_products/range'
 import { changeDate } from './modules/timer_clock';
@@ -83,16 +83,18 @@ import convertObjectToInArray from './modules/function/convertObjectToInArray';
 import queryMakeCategory from './modules/function/queryMakeCategory';
 import clearImgLInksBead from './modules/function/clearImgLInksBead';
 import updateLInksTest from './modules/function/updateLInksTest';
-import selectParametersProducts from './modules/function/selectParametersProducts';
+import { selectParametersProducts } from './modules/selectParametersProducts/selectParametersProducts';
+import { clickTable, addTable } from './modules/selectParametersProducts/clickTable';
+import { asideFilter } from './modules/asideFilter/aside_filter';
+
+
+
 // SELECT json_value(parameters, '$[0].Серія') FROM `shop` WHERE 1                    Показує обєкт Серія це ключ
 // SELECT json_value(parameters, '$[*].*') FROM `shop` WHERE id=22693 json_value      Показує обєкт
 // SELECT JSON_QUERY(parameters, '$[0].Seria') Seria FROM `shop` WHERE 1 JSON_QUERY --Показує масив
 // SELECT JSON_QUERY(parameters, '$[*].Seria') Seria FROM `shop` WHERE 1              Показує масив   Seria це масив
 // SELECT JSON_VALUE(parameters_new, '$[0].Тип холодильника') typew FROM shop WHERE JSON_VALUE(parameters_new, '$[0].Тип холодильника') = 'Двокамерний'
 // http://trygonimetry.smm.zzz.com.ua/shop/filter-category=Електроніка/filter-category=Гаджети/filter-category=Гаджети/
-
-
-
 
 
 // const url1 = 'http://globoteh.ru/wa-data/public/shop/products/50/14/1450/images/4439/4439.970.jpg';
@@ -112,6 +114,7 @@ import selectParametersProducts from './modules/function/selectParametersProduct
 
 
 // var url = 'http://globoteh.ru/wa-data/public/shop/products/50/14/1450/images/4439/4439.970.jpg';
+
 
 // $(document).ready(function () {
 //     $.get(url, function () {
@@ -133,13 +136,9 @@ import selectParametersProducts from './modules/function/selectParametersProduct
 // clearImgLInksBead(80);
 // updateLInksTest();
 
-selectParametersProducts();
+// selectParametersProducts();
 
-
-
-
-
-
+start();
 
 
 
@@ -156,7 +155,7 @@ body.addEventListener('click', (e) => {
     e.stopPropagation();//Забороняє вспливання подій
     const targetElement = e.target
     const catalogLink = targetElement.closest('.data-catalog-level');
-    console.log(targetElement);
+    // console.log(targetElement);
 
 
     if (targetElement.closest('.main-menu__icon-wrapper')) {
@@ -237,22 +236,28 @@ body.addEventListener('click', (e) => {
             // catalogLink.preventDefault();
             // catalogcreatecard(Number(levelCatalog), [catalog_00, catalog_01, catalog_02], );
         }
+    } else if (targetElement.closest('.table-category-select .stroka')) {
+        clickTable(targetElement);
+    } else if (targetElement.closest('.btn-add-table')) {
+        addTable(targetElement);
     }
-})
+});
+
+
 
 // http://trygonimetry.smm.zzz.com.ua/shop/filterjson-parameters_new=Серія=WW/
 
 
-start();
+
 async function start() {
 
     // http://trygonimetry.smm.zzz.com.ua/shop/filter=оообєм
-    // let getQuery = await getZapros(urlJsonServer + 'shop/filter=оообєм');
+    // let getQuery = await  getQuery(urlJsonServer + 'shop/filter=оообєм');
     {
-        // let getQuery = await getZapros(urlJsonServer + 'shop');
+        // let getQuery = await  getQuery(urlJsonServer + 'shop');
         // console.log(getQuery)
 
-        // let getQuery = await getZapros(urlJsonServer + 'shop/filterjson-parameters_new=Загальний+обєм=241+л');
+        // let getQuery = await  getQuery(urlJsonServer + 'shop/filterjson-parameters_new=Загальний+обєм=241+л');
         // getQuery && getQuery.forEach(e => {//перевірити на масив
         //     e.parameters_new = JSON.parse(e.parameters_new)
         //     e = e.parameters_new[0]
@@ -260,7 +265,7 @@ async function start() {
         // });
 
 
-        // let getQuery = await getZaprosObj({
+        // let getQuery = await  getQueryObj({
         //     url: urlJsonServer,
         //     table: "shop",
         //     search: `filter-category=Електроніка Гаджети Смартфони`,
@@ -271,20 +276,20 @@ async function start() {
         //     // search: `filterjson-parameters_new=Серія=WW`
         // });
 
-        // let getQuery1 = await getZaprosObj(url, table, search, rand, limit);
-        // generateCards(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка', 'Гаджети', 'Гаджети'], 'rand()', 'limit=6')), '.arrivals__cards .cards');
-        // let getQuery1 = await getZaprosObj(urlJsonServer, "shop/", ``, '', '');
+        // let getQuery1 = await  getQueryObj(url, table, search, rand, limit);
+        // generateCards(transformData(await  getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка', 'Гаджети', 'Гаджети'], 'rand()', 'limit=6')), '.arrivals__cards .cards');
+        // let getQuery1 = await  getQueryObj(urlJsonServer, "shop/", ``, '', '');
     }
 
 
     {
 
-        // const images = getZapros(urlJsonServer + 'shop/', 'category', ['Мелкая_бытовая_техника', 'Кухня', 'Кухонные_комбайны'], 'rand()', 'limit=6');
+        // const images =  getQuery(urlJsonServer + 'shop/', 'category', ['Мелкая_бытовая_техника', 'Кухня', 'Кухонные_комбайны'], 'rand()', 'limit=6');
     }
 
 
 
-    let categoryListFilter = await getZapros(urlJsonServer + 'shop_category_filter');
+    let categoryListFilter = await getQuery(urlJsonServer + 'shop_category_filter');
     categoryListFilter = categoryListFilter[0];
 
 
@@ -294,7 +299,7 @@ async function start() {
     // categoryListFilter.category = JSON.parse(categoryListFilter.filter);
     // console.log(categoryListFilter);
 
-    let categoryList = await getZapros(urlJsonServer + 'shop_category/');
+    let categoryList = await getQuery(urlJsonServer + 'shop_category/');
     // console.log(categoryList.data[0])
     categoryList = categoryList.data[0];
 
@@ -309,7 +314,7 @@ async function start() {
     const xx = Object.keys(categoryList)
     //Добавляє до кожної категорії і підкатегорії малюнок  
     // xx.forEach(e => {
-    //     getZapros(urlJsonServer + 'shop/', 'category', [e], 'rand()', 'limit=1')
+    //      getQuery(urlJsonServer + 'shop/', 'category', [e], 'rand()', 'limit=1')
     //         .then(rez => {
     //             const aa = JSON.parse(rez.data[0].images)[0].img;
     //             categoryList[e].imgCategory = aa;
@@ -319,7 +324,7 @@ async function start() {
 
 
     //             yy.forEach(ee => {
-    //                 getZapros(urlJsonServer + 'shop/', 'category', [e + '---' + ee], 'rand()', 'limit=1')
+    //                  getQuery(urlJsonServer + 'shop/', 'category', [e + '---' + ee], 'rand()', 'limit=1')
     //                     .then(rez => {
     //                         const aa = JSON.parse(rez.data[0].images)[0].img;
     //                         categoryList[e][ee].imgCategory = aa;
@@ -328,7 +333,7 @@ async function start() {
     //                         // console.log(yy)
 
     //                         zz.forEach(eee => {
-    //                             getZapros(urlJsonServer + 'shop/', 'category', [e + '---' + ee + "---" + eee], 'rand()', 'limit=1')
+    //                              getQuery(urlJsonServer + 'shop/', 'category', [e + '---' + ee + "---" + eee], 'rand()', 'limit=1')
     //                                 .then(rez => {
     //                                     const aa = JSON.parse(rez.data[0].images)[0].img;
     //                                     categoryList[e][ee][eee][0] = { "imgCategory": aa };
@@ -358,15 +363,15 @@ async function start() {
         // UPDATE `shop` SET `category` = REPLACE(category, id, ''), `title` = REPLACE(title, id, '') WHERE `shop`.`id` = 22710;
 
         // const p = [];
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', [], 'rand()', 'limit=50'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=8'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=8'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Компьютерная_техника---Ноутбуки_и_аксессуары---Ноутбуки'], '', 'limit=1000'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Компютери'], '', 'limit=5'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=5'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=5'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---TV'], '', 'limit=10'));
-        // p.push(getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Планшети'], '', 'limit=5'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', [], 'rand()', 'limit=50'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=8'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=8'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Компьютерная_техника---Ноутбуки_и_аксессуары---Ноутбуки'], '', 'limit=1000'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Компютери'], '', 'limit=5'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=5'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=5'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---TV'], '', 'limit=10'));
+        // p.push( getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Планшети'], '', 'limit=5'));
 
         // Promise.all(p).then((values) => {
         //     console.log(values)
@@ -381,17 +386,16 @@ async function start() {
         //     generateCardsBestDeals(transformData(values[8]), '.grocery .bestdeals_main-cards');
         // });
 
-        generateCards(transformData(await getZapros(urlJsonServer + 'shop/', 'category', [], 'rand()', 'limit=10')), '.arrivals__cards .cards');
-        generateCards(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=8')), '.easy_monthly .cards');
-        generateCards(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=8')), '.on_sale .cards');
-        generateCards(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Компьютерная_техника---Ноутбуки_и_аксессуары---Ноутбуки'], '', 'limit=10')), '.top_rated .cards');
+        generateCards(transformData(await getQuery(urlJsonServer + 'shop/', 'category', [], 'rand()', 'limit=10')), '.arrivals__cards .cards');
+        generateCards(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=8')), '.easy_monthly .cards');
+        generateCards(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=8')), '.on_sale .cards');
+        generateCards(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Компьютерная_техника---Ноутбуки_и_аксессуары---Ноутбуки'], '', 'limit=10')), '.top_rated .cards');
 
-        generateCardsBestDeals(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Компютери'], '', 'limit=5')), '.kitchen_appliances .bestdeals_main-cards');
-        generateCardsBestDeals(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=5')), '.consoles .bestdeals_main-cards');
-        generateCardsBestDeals(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=5')), '.tv_video .bestdeals_main-cards');
-        generateCardsBestDeals(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---TV'], '', 'limit=10')), '.cell_phones .bestdeals_main-cards');
-        generateCardsBestDeals(transformData(await getZapros(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Планшети'], '', 'limit=5')), '.grocery .bestdeals_main-cards');
-
+        generateCardsBestDeals(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Компютери'], '', 'limit=5')), '.kitchen_appliances .bestdeals_main-cards');
+        generateCardsBestDeals(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Ноутбуки'], '', 'limit=5')), '.consoles .bestdeals_main-cards');
+        generateCardsBestDeals(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Смартфони'], '', 'limit=5')), '.tv_video .bestdeals_main-cards');
+        generateCardsBestDeals(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---TV'], '', 'limit=10')), '.cell_phones .bestdeals_main-cards');
+        generateCardsBestDeals(transformData(await getQuery(urlJsonServer + 'shop/', 'category', ['Електроніка---Гаджети---Планшети'], '', 'limit=5')), '.grocery .bestdeals_main-cards');
 
         stratLocalStorage('.cart_list__cart', 'cart');
         stratLocalStorage('.cart_list__likes', 'likes');
@@ -410,10 +414,10 @@ async function start() {
         if (catalogs[0] === 'undefined') catalogs = [];
         let product_id = sessionStorage.getItem('product_id');
 
-        console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
-        console.log(catalogs);
-        console.log('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN')
-        console.log(LEVEL_CATALOG);
+        // console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
+        // console.log(catalogs);
+        // console.log('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN')
+        // console.log(LEVEL_CATALOG);
 
         //Якщо головний каталог або підкаталоги
         if (LEVEL_CATALOG >= 0 || LEVEL_CATALOG <= 100) {
@@ -444,9 +448,9 @@ async function start() {
 //     .then(data => console.log(data))
 
 
-// const rezakt = await getZapros(urlJsonServer);
+// const rezakt = await  getQuery(urlJsonServer);
 
-// console.log(await getZapros(urlJsonServer))
+// console.log(await  getQuery(urlJsonServer))
 
 // fetch(`http://trygonimetry.smm.zzz.com.ua/shop`)
 // fetch(`${urlJsonServer}`)
@@ -666,7 +670,7 @@ function addToCard(dataJson) {
 // cleanData();
 
 async function cleanData() {//очишчаємо одинакові записи
-    let getQuery = await getZapros(urlJsonServer + 'shop/', '', [], '', 'limit=5');
+    let getQuery = await getQuery(urlJsonServer + 'shop/', '', [], '', 'limit=5');
     console.log(getQuery);
 
     let arrkod_product = {};

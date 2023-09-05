@@ -1,6 +1,6 @@
 // ***************************************************************************
 import { CATALOGHTML } from '../GlobalVariable';
-import { getZapros, transformData } from '../fetch/fetch';
+// import {  getQuery, transformData } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 import { createFormsSort } from '../sort_products/sort_products';
 

@@ -1,5 +1,5 @@
 
-import { getZapros, updateDataPost } from '../fetch/fetch';
+import { getQuery, updateDataPost } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 //Очистка ссилок img
 async function clearImgLInksBead(bbb) {
@@ -10,7 +10,7 @@ async function clearImgLInksBead(bbb) {
     const elementShowCounter = clearcountelementParent.querySelector('.bbb' + bbb);
     elementShowCounter.innerText = '0'
     const countBlock = 100;
-    let getQuery = await getZapros(urlJsonServer + 'shop/5', '', [], '', '');
+    let getQuery = await getQuery(urlJsonServer + 'shop/5', '', [], '', '');
 
     const sizeList = getQuery.meta[0].count
     const sizeBlock = parseInt(getQuery.meta[0].count / countBlock)
@@ -25,9 +25,9 @@ async function clearImgLInksBead(bbb) {
     // const bbb = 5;
     // 66
     for (let block = bbb; block <= bbb; block++) {
-        // const getQueryData = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${sizeBlock}>page[limit]=${block}/fields[shop]=id,parameters,parameters_new`);
+        // const getQueryData = await  getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${sizeBlock}>page[limit]=${block}/fields[shop]=id,parameters,parameters_new`);
         let pp, ff, ppff = [];
-        const getQueryData = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${sizeBlock}>page[limit]=${block}/fields[shop]=id,images`);
+        const getQueryData = await getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${sizeBlock}>page[limit]=${block}/fields[shop]=id,images`);
         let flag = false;
         console.log(getQueryData.data.length)
 

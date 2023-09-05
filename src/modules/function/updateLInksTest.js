@@ -1,24 +1,24 @@
 
 import { data } from 'autoprefixer';
-import { getZapros, updateDataPost, addDataPost } from '../fetch/fetch';
+import { getQuery, updateDataPost, addDataPost } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 //Очистка ссилок img
 async function updateLInksTest() {
 
 
-    // const rezCategory = await getZapros(urlJsonServer + 'shop/', 'category', ['Мелкая_бытовая_техника', 'Кухня', 'Мясорубки'], 'rand()', '');
+    // const rezCategory = await  getQuery(urlJsonServer + 'shop/', 'category', ['Мелкая_бытовая_техника', 'Кухня', 'Мясорубки'], 'rand()', '');
 
     // console.log(rezCategory)
     // for (const obj of rezCategory.data) {
     //     console.log(JSON.parse(obj.images))
     // }
-    let categoryList = await getZapros(urlJsonServer + 'shop_category/');
+    let categoryList = await getQuery(urlJsonServer + 'shop_category/');
     [categoryList] = JSON.parse(categoryList.data[0].category);
     console.log(categoryList)
 
     // parseCategory(categoryList, [])
 
-    // let getQuery = await getZapros(urlJsonServer + 'shop/5', '', [], '', '');
+    // let getQuery = await  getQuery(urlJsonServer + 'shop/5', '', [], '', '');
     // const sizeList = getQuery.meta[0].count;
     // const sizeBlock = 2000;
     // const countBlock = parseInt(getQuery.meta[0].count / sizeBlock);
@@ -28,15 +28,15 @@ async function updateLInksTest() {
     // console.log(countBlock);
 
     // let counter = 1;
-    // const getQueryData1 = await getZapros(urlJsonServer + 'shop/2', '', [], '', ``);
+    // const getQueryData1 = await  getQuery(urlJsonServer + 'shop/2', '', [], '', ``);
 
 
 
     {
-        // const getQueryData1 = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${10000}>page[limit]=${2}`);
+        // const getQueryData1 = await  getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${10000}>page[limit]=${2}`);
         // console.log(getQueryData1.data);
 
-        const getQueryData1 = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${50000}>page[limit]=${6}/fields[shop]=id,images`);
+        const getQueryData1 = await getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${50000}>page[limit]=${6}/fields[shop]=id,images`);
         console.log(getQueryData1.data);
         let newDataArr = [];
         getQueryData1.data.forEach(e => {
@@ -111,8 +111,8 @@ async function updateLInksTest() {
 
 
 
-    // const getQueryData = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${10}>page[limit]=${10}`);
-    // const getQueryData = await getZapros(urlJsonServer + 'shop/', '', [], '', `page[size]=${30}>page[limit]=${4}/fields[shop]=id,title`);
+    // const getQueryData = await  getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${10}>page[limit]=${10}`);
+    // const getQueryData = await  getQuery(urlJsonServer + 'shop/', '', [], '', `page[size]=${30}>page[limit]=${4}/fields[shop]=id,title`);
     // // getQueryData.data.forEach(e => {
     // //     console.log(e);
     // // });
@@ -226,7 +226,7 @@ async function parseCategory(obj, arr) {
         if (!Array.isArray(obj[k])) {
             parseCategory(obj[k], [...arr, k])
         } else {
-            const dataArray = await getZapros(urlJsonServer + 'shop/', 'category', [...arr, k], '', '');
+            const dataArray = await getQuery(urlJsonServer + 'shop/', 'category', [...arr, k], '', '');
             console.log(`${[...arr, k]}   ${obj[k]}`)
             console.log(dataArray.data.length);
         }

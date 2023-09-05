@@ -3,7 +3,7 @@ import { urlJsonServer } from '../GlobalVariable';
 import printBreadCrumbs from '../function/print_bead_crumbs.js'
 import printSubCatalog from "./printSubCatalog";
 import printCard from "./printCard";
-import { getZapros, transformData, allDataSearch } from "../fetch/fetch";
+import { getQuery, transformData, allDataSearch } from "../fetch/fetch";
 import { getCountLocalStorage } from '../count_cards/count_cards';
 
 // let page = 0;
@@ -21,8 +21,8 @@ async function catalogCreateCard(LevelCatalog, catalogs, categoryList) {
             title && (title.innerText = catalogs[LevelCatalog - 1]);
         }
         printSubCatalog(LevelCatalog, catalogs, categoryList);
-        // const DATA_PRODUCTS = transformData(await getZapros(urlJsonServer + 'shop/', 'category', catalogs, 'rand()', 'limit=' + LIMIT));
-        const DATA_PRODUCTS = transformData(await getZapros(urlJsonServer + 'shop/', 'category', catalogs, 'limit=' + getCountLocalStorage()));
+        // const DATA_PRODUCTS = transformData(await  getQuery(urlJsonServer + 'shop/', 'category', catalogs, 'rand()', 'limit=' + LIMIT));
+        const DATA_PRODUCTS = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogs, 'limit=' + getCountLocalStorage()));
         console.log(DATA_PRODUCTS);
         printCard(convertObjectToInArray(DATA_PRODUCTS, new Array()), catalogs, '.search-product__off .catalog_product-grid');
     }

@@ -2,7 +2,7 @@
 // SELECT * FROM `shop` WHERE `parameters` LIKE '%\\''%'
 
 
-
+import '../node_modules/binary-search/binarysearch';
 import './index.html';
 import './catalog.html';
 
@@ -14,8 +14,6 @@ import 'jquery-form-styler';
 // require('jquery-form-styler');
 import 'ion-rangeslider';
 
-
-
 // appliances total   47191
 // plumbing	52617
 // auto_moto	48984
@@ -23,9 +21,8 @@ import 'ion-rangeslider';
 // tools	30010
 // tv	12443
 // childrens	36491
-// computer_technology	8758
+// computer_technology 8758
 // all total	240714
-
 
 // import { appliances_all } from './json_shop/appliances_all.js'; //total count 47191
 // import { tools_all } from './json_shop/tools_all.js'; //total count 32512
@@ -37,7 +34,6 @@ import 'ion-rangeslider';
 // import { computer_technology } from './json_shop/computer_technology.js';//8758
 // import { phones } from './json_shop/phones.js'; //4584
 
-
 // appliances_all startNumberCodProduct = 1000;
 // tools_all startNumberCodProduct = 100000;
 // plumbing startNumberCodProduct = 200000;
@@ -46,9 +42,6 @@ import 'ion-rangeslider';
 // tv startNumberCodProduct = 500000;
 // computer_technology startNumberCodProduct = 600000;
 // phones startNumberCodProduct = 700000;
-
-
-
 
 // console.log(phones);
 // addToCard(phones);// Добавляємо на сервер JSON дані з файлу
@@ -75,7 +68,7 @@ import catalogcreatecard from './modules/catalog/catalogCreateCard';
 import productCreateCart from './modules/product/product_create_cart';
 import { dataGlobalJson, count_elements } from './modules/GlobalVariable';
 import searchCatalogCreateCard from './modules/catalog/searchCatalogCreateCard';
-import { getQuery, getQueryObj, transformData, updateDataPost, addDataPost, deletePost } from './modules/fetch/fetch';
+import { getQuery, getQueryObj, transformData, updateDataPost, addDataPost, deletePost, postQuery } from './modules/fetch/fetch';
 import { getCountLocalStorage } from './modules/count_cards/count_cards';
 import './modules/sort_products/range'
 import { changeDate } from './modules/timer_clock';
@@ -86,7 +79,6 @@ import updateLInksTest from './modules/function/updateLInksTest';
 import { selectParametersProducts } from './modules/selectParametersProducts/selectParametersProducts';
 import { clickTable, addTable } from './modules/selectParametersProducts/clickTable';
 import { asideFilter } from './modules/asideFilter/aside_filter';
-
 
 
 // SELECT json_value(parameters, '$[0].Серія') FROM `shop` WHERE 1                    Показує обєкт Серія це ключ
@@ -138,10 +130,16 @@ import { asideFilter } from './modules/asideFilter/aside_filter';
 
 // selectParametersProducts();
 
-start();
+// start();
+// select: "SELECT * FROM shop  WHERE category LIKE '%Мелкая_бытовая_техника Кухня Соковыжималки%'  AND  JSON_VALUE(parameters_new, '$[0].Тип' ) = 'шнековая'  AND  JSON_VALUE(parameters_new, '$[0].Тип' ) = 'центробежная'"
+// select: "INSERT INTO `posts` (`id`, `name`, `text`, `text1`, `text2`, `text3`, `json`, `rating`, `sales`) VALUES (NULL, 'цуцецукеуцеу', 'цукеува345іуке4ц5е4е', 'цу4цке4е4е', 'ува345ец43кц45е4цкц4ке4е', 'цува345ец4ка ук 45е 5 ц44 4', NULL, '3345', '34535')"
 
+async function postq() {
+    const rez = await postQuery(urlJsonServer + 'shop/', JSON.stringify([{ select: "SELECT * FROM shop  WHERE category LIKE '%Мелкая_бытовая_техника Кухня Соковыжималки%' LIMIT 1 " }]))
+    console.log(...rez)
+}
 
-
+postq();
 
 
 const hoverMainMenu = document.querySelector('.hover_maim_menu');
@@ -237,9 +235,9 @@ body.addEventListener('click', (e) => {
             // catalogcreatecard(Number(levelCatalog), [catalog_00, catalog_01, catalog_02], );
         }
     } else if (targetElement.closest('.table-category-select .stroka')) {
-        clickTable(targetElement);
+        clickTable(targetElement);//При кліку на таблицю selectParametersProducts міняємо чексбокси і радіо кнопки
     } else if (targetElement.closest('.btn-add-table')) {
-        addTable(targetElement);
+        addTable(targetElement);//При кліку на кнопку в низу таблиці вибрана інформаціє передається в базу даниз shop_category_filter
     }
 });
 

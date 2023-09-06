@@ -26,3 +26,10 @@ npm run build-prod
 ```shell
 npm run clear
 ```
+echo "# shopJS" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/serednii/shopJS.git
+git push -u origin main

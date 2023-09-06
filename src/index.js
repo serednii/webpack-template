@@ -1,8 +1,6 @@
 
 // SELECT * FROM `shop` WHERE `parameters` LIKE '%\\''%'
 
-
-import '../node_modules/binary-search/binarysearch';
 import './index.html';
 import './catalog.html';
 

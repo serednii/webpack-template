@@ -1,71 +1,71 @@
 
 import { isSet } from "./isSet";
-export const newPrice = (e, k, setParameters) => {
+export const newPrice = (obj, k, newObject) => {//obj, k, newObject
     const temp = new Set();
-    e[k] = Number(e[k])
+    obj[k] = Number(obj[k])
     // console.log(e[k])
-    if (isSet(setParameters[k])) {
-        let arr = ([...Array.from(setParameters[k]), e[k]])
+    if (isSet(newObject[k])) {
+        let arr = ([...Array.from(newObject[k]), obj[k]])
         // console.log(arr)
         arr.sort((a, b) => a - b);
         arr.forEach(m => {
             temp.add(m);
         });
     } else {
-        temp.add(e[k]);
+        temp.add(obj[k]);
     }
     // console.log(temp)
     return temp;
 }
 
-export const power = (e, k, setParameters) => {
+export const power = (obj, k, newObject) => {
     const temp = new Set();
-    if (isSet(setParameters[k])) {
-        const arr = ([...Array.from(setParameters[k]), ((e[k]) + " ")])//
+    if (isSet(newObject[k])) {
+        const arr = ([...Array.from(newObject[k]), ((obj[k]))])//
         arr.forEach(m => {
-            temp.add(m);
+            temp.add(m.trim());
         });
     } else {
-        temp.add(e[k] + " ");
+        temp.add(obj[k].trim());
     }
     return temp;
 }
 
-export const nozzles = (e, k, setParameters) => {
+export const nozzles = (obj, k, newObject) => {
     const temp = new Set();
-    if (isSet(setParameters[k])) {
-        let arr = ([...Array.from(setParameters[k]), ((e[k]) + " ")])//
+    if (isSet(newObject[k])) {
+        let arr = ([...Array.from(newObject[k]), ((obj[k]))])//
         // console.log(arr)
         arr = arr.join(',').split(',');
 
         arr.forEach(m => {
-            temp.add(m);
+            temp.add(m.trim());
         });
     } else {
-        temp.add(e[k] + " ");
+        temp.add(obj[k].trim());
     }
     return temp;
 }
 
-export const weight = (e, k, setParameters) => {
+export const weight = (obj, k, newObject) => {
     const temp = new Set();
 
-    if (isSet(setParameters[k])) {
-        let arr = ([...Array.from(setParameters[k]), ((" " + e[k]))])//
+    if (isSet(newObject[k])) {
+        let arr = ([...Array.from(newObject[k]), ((" " + obj[k]))])//
         arr.sort((a, b) => parseFloat(a) - parseFloat(b));
         arr.forEach(m => {
-            temp.add(m);
+            temp.add(m.trim());
         });
     } else {
-        temp.add(" " + e[k]);
+        temp.add(obj[k].trim());
     }
     return temp;
 }
-// (^\d*)|(\d*\.\d*)
-export const all = (e, k, setParameters) => {
+
+export const all = (obj, k, newObject) => {
     const temp = new Set();
-    if (isSet(setParameters[k])) {
-        let arr = ([...Array.from(setParameters[k]), (e[k] + " ")])//
+    if (isSet(newObject[k])) {
+        let arr = ([...Array.from(newObject[k]), (obj[k].trim())])//
         arr = arr.join(',').split(',');
 
 
@@ -76,7 +76,7 @@ export const all = (e, k, setParameters) => {
             temp.add(m);
         });
     } else {
-        temp.add(e[k] + " ");
+        temp.add(obj[k].trim());
     }
     return temp;
 }

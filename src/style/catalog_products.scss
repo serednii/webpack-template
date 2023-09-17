@@ -73,20 +73,31 @@
 
         &-sort_parent {
             width: 100%;
-            height: 50px;
+            min-height: 50px;
             display: flex;
+            flex-wrap: wrap;
             margin-bottom: 10px;
+            justify-content: space-between;
+
         }
 
+        &-sort_parent_right {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &-sort_parent_left {}
+
+        &-sort_parent_right {}
+
         &-sort {
-            width: 300px;
+            width: 250px;
             margin-right: 20px;
             height: 50px;
         }
 
         &-count {
-            width: 300px;
-            margin-left: auto;
+            width: 90px;
             margin-right: 20px;
             height: 50px;
 

@@ -29,7 +29,7 @@ export function clickTable(target) {
 }
 
 
-export function addTable(e) {
+export function addTable(e) {//
     const table = e.closest('.table-category-select_parent');
     const category = table.querySelector('.table-category-select_title').innerText;
     console.log(table);

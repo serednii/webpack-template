@@ -2,16 +2,17 @@ import { PRODUCTHTML } from "../GlobalVariable";
 // ***************************************************************************
 function printCard(objectData, catalogs, clases) {
     const cartListWrapper = document.querySelector(clases);
-    console.log('5555555555555555555555555555555555555555555555555555555555555555555555555555555555');
+    console.log('555555555555555555555555555');
 
-    console.log(clases);
+    // console.log(objectData);
+    console.log(catalogs);
 
     if (!cartListWrapper) return
     // const elements = cartListWrapper.querySelectorAll('.catalog_product-grid_cart');
     // if (elements) elements.forEach(e => e.remove());//якщо є картки то видаляємо
-    cartListWrapper.innerHTML = '';
-    cartListWrapper.dataset.catalogs = catalogs.join(' ');
-    objectData && objectData.forEach(el => {
+    cartListWrapper && (cartListWrapper.innerHTML = '');
+    cartListWrapper && (cartListWrapper.dataset.catalogs = catalogs.join(' '));
+    objectData.forEach(el => {
         // console.log(el.images)
         const cartItemHTML = `<li class="catalog_product-grid_cart collect_data data-catalog-level" 
             data-catalogs="${el.category && el.category}" 
@@ -35,8 +36,8 @@ function printCard(objectData, catalogs, clases) {
                 </div>
 
                 <a href="${PRODUCTHTML}" class="catalog_product__picture">
-                    <img class="picture_1 product-img" src="${el.images[0] && el.images[0].img}"
-                        alt="${el.images[0] && el.images[0].alt}">
+                    <img class="picture_1 product-img" src="${el && el.images[0].img}"
+                        alt="${el && el.images[0].alt}">
                 </a>
                 <div class="catalog_product_content">
                     <a href="${PRODUCTHTML}" class="catalog_product-name--link">

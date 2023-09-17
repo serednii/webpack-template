@@ -157,8 +157,6 @@ export function transformData(data) {
     if (!data.data.message) {
 
         const dataObject = data.data.map(e => {
-
-
             const _e = Object.assign({}, e);
             // if (typeof e.category === 'string') _e.catalog = e.category.split(" ");
             if (typeof _e.images === 'string') _e.images = JSON.parse(_e.images);

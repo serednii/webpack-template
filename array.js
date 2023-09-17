@@ -89,21 +89,34 @@ console.log(nums);
 
 
 console.time('node --trace-warnings ...');
-let arrayHight = new Array(59999999).fill(1).map((e) => (Math.floor(Math.random() * 999999))).sort((a, b) => +a - +b)
-console.timeEnd('node --trace-warnings ...');
-// arrayHight = arrayHight.sort((a, b) => +a - +b)
-
-console.time('node --trace-warnings ...');
-const indexElement = binarySearch(arrayHight, 24464)
+let arrayHight = new Array(19999999).fill(1).map((e) => (Math.floor(Math.random() * 999999)))
 console.timeEnd('node --trace-warnings ...');
 
 console.time('node --trace-warnings ...');
-const indexElement1 = arrayHight.includes(24464)
+let max = arrayHight[0];
+for (let i = 1; i < arrayHight.length; i++) {
+    if (arrayHight[i] > max) max = arrayHight[i];
+}
 console.timeEnd('node --trace-warnings ...');
 
+console.log(max)
+
 console.time('node --trace-warnings ...');
-const indexElement2 = arrayHight.indexOf(24464)
+arrayHight = arrayHight.sort((a, b) => +a - +b)
 console.timeEnd('node --trace-warnings ...');
+console.log(arrayHight[arrayHight.length - 1])
+
+// console.time('node --trace-warnings ...');
+// const indexElement = binarySearch(arrayHight, 24464)
+// console.timeEnd('node --trace-warnings ...');
+
+// console.time('node --trace-warnings ...');
+// const indexElement1 = arrayHight.includes(24464)
+// console.timeEnd('node --trace-warnings ...');
+
+// console.time('node --trace-warnings ...');
+// const indexElement2 = arrayHight.indexOf(24464)
+// console.timeEnd('node --trace-warnings ...');
 
 
 
@@ -114,7 +127,7 @@ console.timeEnd('node --trace-warnings ...');
 // for (let i = 0; i<100000000; i++ ){
 //     fill(Math.floor(Math.random() * 9999999999));
 // }
-console.log(indexElement);
+// console.log(indexElement);
 
 
 

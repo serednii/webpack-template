@@ -2,7 +2,7 @@
 import { CATALOGHTML } from '../GlobalVariable';
 // import {  getQuery, transformData } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
-import { createFormsSort } from '../sort_products/sort_products';
+import { createFormsSort } from '../filter/asideFilter/sort_products';
 
 function printSubCatalog(LevelCatalog, catalogs, categoryList) {
     const subCatalogListWrapper = document.querySelector('.catalog_products  .catalog_list');
@@ -23,7 +23,6 @@ function printSubCatalog(LevelCatalog, catalogs, categoryList) {
         }
         console.log(keyProduct)
 
-
         const key = Object.keys(keyProduct);//Вибираємо підрозділи вданому рівні каталога
 
         key.forEach(_category => {//imgCategory
@@ -32,6 +31,7 @@ function printSubCatalog(LevelCatalog, catalogs, categoryList) {
                 createElement(MENU_PATCH, _category, LevelCatalog, subCatalogListWrapper, keyProduct[_category].imgCategory)
             }
         })
+
         console.log(MENU_PATCH)
         console.log(key.length)
         if (key.length === 1 && key[0] === 'imgCategory') {
@@ -44,15 +44,11 @@ function printSubCatalog(LevelCatalog, catalogs, categoryList) {
             CATALOG_PRODUCT_FILTER_PARENT.classList.add('hidden');
             CATALOG_PRODUCT.classList.add('disable_grid');
         }
-
-
-
-
-
     } else {
         return;
     }
 }
+
 // ***************************************************************************
 function createElement(MENU_PATCH, _category, LevelCatalog, subCatalogListWrapper, imgCategory) {
     const subCAtalogItemHTML = `

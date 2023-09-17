@@ -17,25 +17,56 @@ export async function selectParametersProducts() {
     // console.log(getQueryData4)
 
     const arrayParametrsCategory = [];
-    let counter = 0;
-    arrayCategory.forEach(async function (keyCategory, i) {
-        if (i < 50) {
-            const getQueryData = transformData(await getQuery(urlJsonServer + 'shop/', 'category', [keyCategory], '', ''));
-            // console.log(getQueryData);
-            //Передаємо в функцію масив обєктів з товарами
-            const setParameters = generateObject(getQueryData);
-            // console.log({ [keyCategory]: setParameters })
+    // let counter = 50;
+    // arrayCategory.forEach(async function (keyCategory, i) {
+    //     if (i < 61) {
+    //         const result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', [keyCategory], '', ''));
+    //         // console.log(getQueryData);
+    //         //Передаємо в функцію масив обєктів з товарами
+    //         const setParameters = generateObject(result);
+    //         // console.log({ [keyCategory]: setParameters })
 
-            // arrayParametrsCategory.push({ [keyCategory]: setParameters })
-            //Роздруковуємо на екран товари з параметрами
-            printTable({ params: setParameters, nameCategory: keyCategory })
+    //         // arrayParametrsCategory.push({ [keyCategory]: setParameters })
+    //         //Роздруковуємо на екран товари з параметрами
+    //         printTable({ params: setParameters, nameCategory: keyCategory })
 
-            counter++;
-            if (counter === 3) {
-                console.log(...arrayParametrsCategory)
-            }
-        }
-    })
+    //         counter++;
+    //         if (counter === 3) {
+    //             console.log(...arrayParametrsCategory)
+    //         }
+    //     }
+    // })
+
+
+
+
+    // arrayCategory.forEach(async function (keyCategory, i) {
+    //     if (i < 61) {
+    //         const result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', [keyCategory], '', ''));
+    //         // console.log(getQueryData);
+    //         //Передаємо в функцію масив обєктів з товарами
+    //         const setParameters = generateObject(result);
+    //         // console.log({ [keyCategory]: setParameters })
+
+    //         // arrayParametrsCategory.push({ [keyCategory]: setParameters })
+    //         //Роздруковуємо на екран товари з параметрами
+    //         printTable({ params: setParameters, nameCategory: keyCategory })
+
+    //         counter++;
+    //         if (counter === 3) {
+    //             console.log(...arrayParametrsCategory)
+    //         }
+    //     }
+    // })
+
+
+    for (let i = 50; i <= 61; i++) {
+        const result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', [arrayCategory[i]], '', ''));
+        //Передаємо в функцію масив обєктів з товарами
+        const setParameters = generateObject(result);
+        //Роздруковуємо на екран товари з параметрами
+        printTable({ params: setParameters, nameCategory: arrayCategory[i] })
+    }
 }
 
 

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 // const CopyPlugin = require('copy-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -21,6 +22,7 @@ const optimization = () => {
 
 
 module.exports = {
+  plugins: [new NodePolyfillPlugin()],
   mode,
   target,
   devtool,
@@ -28,6 +30,11 @@ module.exports = {
     port: 3010,
     open: true,
     hot: true,
+  },
+  resolve: {
+    fallback: {
+      util: require.resolve("util/")
+    }
   },
   // entry: path.resolve(__dirname, 'src', 'index.js'),
   // output: {

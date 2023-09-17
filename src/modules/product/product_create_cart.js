@@ -1,5 +1,5 @@
 import { urlJsonServer } from '../GlobalVariable';
-import printBreadCrumbs from '../function/print_bead_crumbs';
+import printBreadCrumbs from '../bread_crumbs/print_bead_crumbs';
 import printElementHtml from './printElementHtml';
 import { startSlider } from '../slider';
 import { getQuery, transformData } from '../fetch/fetch';

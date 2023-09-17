@@ -1,6 +1,10 @@
 
 // SELECT * FROM `shop` WHERE `parameters` LIKE '%\\''%'
 
+// const adsf = null ?? 'dkjhsshsif'
+// const a = '' ?? 'problem';
+// console.log(a)
+
 import './index.html';
 import './catalog.html';
 
@@ -47,7 +51,7 @@ import 'ion-rangeslider';
 import './modules/slider';
 import './modules/timer_clock';
 import './modules/filter/filter';
-import './modules/count_cards/count_cards';
+import './modules/filter/count_cards/count_cards';
 
 import { urlJsonServer } from './modules/GlobalVariable';
 
@@ -67,17 +71,22 @@ import productCreateCart from './modules/product/product_create_cart';
 import { dataGlobalJson, count_elements } from './modules/GlobalVariable';
 import searchCatalogCreateCard from './modules/catalog/searchCatalogCreateCard';
 import { getQuery, getQueryObj, transformData, updateDataPost, addDataPost, deletePost, postQuery } from './modules/fetch/fetch';
-import { getCountLocalStorage } from './modules/count_cards/count_cards';
+import { getCountLimitLocalStorage } from './modules/filter/count_cards/count_cards';
+import { clickTable, addTable } from './modules/selectParametersProducts/clickTable';
+import { asideFilter, asideFilterRange, deleteParametersFilter, deleteParametersFilterAll } from './modules/filter/asideFilter/aside_filter';
+import { state } from './modules/state/state';
 import './modules/sort_products/range'
 import { changeDate } from './modules/timer_clock';
 import convertObjectToInArray from './modules/function/convertObjectToInArray';
 import queryMakeCategory from './modules/function/queryMakeCategory';
-import clearImgLInksBead from './modules/function/clearImgLInksBead';
+import clearImgLInksBead from './modules/bread_crumbs/clearImgLInksBead';
 import updateLInksTest from './modules/function/updateLInksTest';
 import { selectParametersProducts } from './modules/selectParametersProducts/selectParametersProducts';
-import { clickTable, addTable } from './modules/selectParametersProducts/clickTable';
-import { asideFilter } from './modules/asideFilter/aside_filter';
 
+//Видаляє останній символ з строки
+String.prototype.delOneLast = function () {
+    return this.slice(0, -1)
+}
 
 // SELECT json_value(parameters, '$[0].Серія') FROM `shop` WHERE 1                    Показує обєкт Серія це ключ
 // SELECT json_value(parameters, '$[*].*') FROM `shop` WHERE id=22693 json_value      Показує обєкт
@@ -86,10 +95,8 @@ import { asideFilter } from './modules/asideFilter/aside_filter';
 // SELECT JSON_VALUE(parameters_new, '$[0].Тип холодильника') typew FROM shop WHERE JSON_VALUE(parameters_new, '$[0].Тип холодильника') = 'Двокамерний'
 // http://trygonimetry.smm.zzz.com.ua/shop/filter-category=Електроніка/filter-category=Гаджети/filter-category=Гаджети/
 
-
 // const url1 = 'http://globoteh.ru/wa-data/public/shop/products/50/14/1450/images/4439/4439.970.jpg';
 // const url1 = 'https://www.techiedelight.com/ru/check-for-existence-of-image-at-given-url-javascript/';
-
 
 // fetch(new Request(url1, { method: 'HEAD', mode: 'no-cors' }))
 //     // .then(function () {
@@ -128,16 +135,21 @@ import { asideFilter } from './modules/asideFilter/aside_filter';
 
 // selectParametersProducts();
 
-// start();
+start();
 // select: "SELECT * FROM shop  WHERE category LIKE '%Мелкая_бытовая_техника Кухня Соковыжималки%'  AND  JSON_VALUE(parameters_new, '$[0].Тип' ) = 'шнековая'  AND  JSON_VALUE(parameters_new, '$[0].Тип' ) = 'центробежная'"
 // select: "INSERT INTO `posts` (`id`, `name`, `text`, `text1`, `text2`, `text3`, `json`, `rating`, `sales`) VALUES (NULL, 'цуцецукеуцеу', 'цукеува345іуке4ц5е4е', 'цу4цке4е4е', 'ува345ец43кц45е4цкц4ке4е', 'цува345ец4ка ук 45е 5 ц44 4', NULL, '3345', '34535')"
 
-async function postq() {
-    const rez = await postQuery(urlJsonServer + 'shop/', JSON.stringify([{ select: "SELECT * FROM shop  WHERE category LIKE '%Мелкая_бытовая_техника Кухня Соковыжималки%' LIMIT 1 " }]))
-    console.log(...rez)
-}
+// async function postq() {
+//     const rez = await postQuery(urlJsonServer + 'shop/', JSON.stringify([{ select: "SELECT * FROM shop  WHERE category LIKE '%Мелкая_бытовая_техника Кухня Соковыжималки%' LIMIT 1 " }]))
+//     console.log(...rez)
+// }
 
-postq();
+// postq();
+
+
+
+
+
 
 
 const hoverMainMenu = document.querySelector('.hover_maim_menu');
@@ -145,100 +157,113 @@ const hoverMainMenu = document.querySelector('.hover_maim_menu');
 const body = document.body;
 // let categoryList = {};
 // console.log(hoverMainMenu)
-
-body.addEventListener('click', (e) => {
-    // e.preventDefault();//Відміняє перегрузку сторінки
-    e.stopPropagation();//Забороняє вспливання подій
-    const targetElement = e.target
-    const catalogLink = targetElement.closest('.data-catalog-level');
-    // console.log(targetElement);
+try {
 
 
-    if (targetElement.closest('.main-menu__icon-wrapper')) {
-        const burger = targetElement.closest('.main-menu__icon-wrapper');
-        burger.classList.toggle('open-burger');//open or close burger
-        hoverMainMenu.classList.toggle('open-burger');//open or close menu
-    } else if (!targetElement.closest('.hover_maim_menu')) {
-        document.querySelectorAll('.main-menu__icon-wrapper').forEach((e) => e.classList.remove('open-burger'));;//when clicking outside the all burgers , we close it
-        hoverMainMenu.classList.remove('open-burger');//when clicking outside the menu, we close it
-    }
-
-    if (targetElement.closest('.data-click-card')) {//клік на іконці улюблених товарів та  кнопці  товарів корзини
-        cardList(targetElement);
-    }
+    body.addEventListener('click', (e) => {
+        // e.preventDefault();//Відміняє перегрузку сторінки
+        e.stopPropagation();//Забороняє вспливання подій
+        const targetElement = e.target
+        const catalogLink = targetElement.closest('.data-catalog-level');
+        // console.log(targetElement);
 
 
-    else if (targetElement.closest('.cart_list__list-ware_basket')) {//Видаляємо картку з корзини i улюблених
-        if (targetElement.closest('.cart_list__cart')) {
-            deleteCard(targetElement, '.cart_list__cart');//корзини
-        } else {
-            deleteCard(targetElement, '.cart_list__likes');//улюблених
+        if (targetElement.closest('.main-menu__icon-wrapper')) {
+            const burger = targetElement.closest('.main-menu__icon-wrapper');
+            burger.classList.toggle('open-burger');//open or close burger
+            hoverMainMenu.classList.toggle('open-burger');//open or close menu
+        } else if (!targetElement.closest('.hover_maim_menu')) {
+            document.querySelectorAll('.main-menu__icon-wrapper').forEach((e) => e.classList.remove('open-burger'));;//when clicking outside the all burgers , we close it
+            hoverMainMenu.classList.remove('open-burger');//when clicking outside the menu, we close it
         }
-    }
 
-    else if (targetElement.closest('.our_products .menu_products__item')) {
-        clickTab('our_products', targetElement);
-    } else if (targetElement.closest('.bestdeals .menu_products__item')) {
-        clickTab('bestdeals', targetElement);
-    } else if (targetElement.classList.contains('eye')) {
-        inputEye(targetElement);
-    } else if (targetElement.classList.contains('sing-in')) {
-        singInOpen();
-    } else if (targetElement.closest('.sing-in-registration .menu_circle_close')) {
-        singInClose();
-    } else if (targetElement.classList.contains('sing-in-registration__btn-register') || targetElement.classList.contains('register')) {//Відкриває форму регістрації
-        formRegisterOpen();
-    }
-    else if (targetElement.closest('.header__user .heart')) {//Відкриває форму з карточками уподобань
-        addRemoveClass('.cart_list__likes', 'remove', 'hidden');
-        addRemoveClass('body', 'add', 'overflov-hidden');
-        addRemoveClass('.fon', 'remove', 'hidden');
-    }
-    else if (targetElement.closest('.header__user .cart')) {//Відкриває форму з карточками корзини
-        addRemoveClass('.cart_list__cart', 'remove', 'hidden');
-        addRemoveClass('body', 'add', 'overflov-hidden');
-        addRemoveClass('.fon', 'remove', 'hidden');
-    }
-    else if (targetElement.closest('.cart_list_btn__close')) {
-        addRemoveClass('.cart_list', 'add', 'hidden'); //Закриває форму з карточками корзини
-        addRemoveClass('.cart_list__likes', 'add', 'hidden');//Закриває форму з карточками уподобань
-        addRemoveClass('body', 'remove', 'overflov-hidden');//Відміняє прокручування форми
-        addRemoveClass('.fon', 'add', 'hidden');//забирає фон
-        addRemoveClass('.input_change_time', 'add', 'hidden');//закриває вікно на таймеру
-    }
-    else if (targetElement.closest('.header__user .user')) { //Відкриває форму особистого кабінету
-        addRemoveClass('.user_button', 'remove', 'hidden');
-        addRemoveClass('body', 'add', 'overflov-hidden');
-        addRemoveClass('.fon', 'remove', 'hidden');
-    }
-    else if (targetElement.closest('.user_button_btn__close')) {//Закриває форму особистого кабінету
-        addRemoveClass('.user_button', 'add', 'hidden');
-        addRemoveClass('body', 'remove', 'overflov-hidden');
-        addRemoveClass('.fon', 'add', 'hidden');
-    }
-    // else if (targetElement.closest('.timer')) {//Відкриває форму для настройок таймера
-    //     addRemoveClass('.input_change_time', 'remove', 'hidden');
-    //     document.querySelector('.input_change_time').addEventListener('change', e => changeDate(e));
-    // }
-    else if (catalogLink) { //При кліку на  підменю в каталозі При кліку на меню breadcrumbs
-        if (catalogLink) {
-            console.log('KLIC data-catalog-level')
-            sessionStorage.setItem('catalogs', catalogLink.dataset.catalogs);
-            // sessionStorage.setItem('catalog_00', catalogLink.dataset.catalog_00);
-            // sessionStorage.setItem('catalog_01', catalogLink.dataset.catalog_01);
-            // sessionStorage.setItem('catalog_02', catalogLink.dataset.catalog_02);
-            sessionStorage.setItem('levelCatalog', catalogLink.dataset.level_catalog);
-            sessionStorage.setItem('product_id', catalogLink.dataset.id);
-            // catalogLink.preventDefault();
-            // catalogcreatecard(Number(levelCatalog), [catalog_00, catalog_01, catalog_02], );
+        if (targetElement.closest('.data-click-card')) {//клік на іконці улюблених товарів та  кнопці  товарів корзини
+            cardList(targetElement);
         }
-    } else if (targetElement.closest('.table-category-select .stroka')) {
-        clickTable(targetElement);//При кліку на таблицю selectParametersProducts міняємо чексбокси і радіо кнопки
-    } else if (targetElement.closest('.btn-add-table')) {
-        addTable(targetElement);//При кліку на кнопку в низу таблиці вибрана інформаціє передається в базу даниз shop_category_filter
-    }
-});
 
+
+        else if (targetElement.closest('.cart_list__list-ware_basket')) {//Видаляємо картку з корзини i улюблених
+            if (targetElement.closest('.cart_list__cart')) {
+                deleteCard(targetElement, '.cart_list__cart');//корзини
+            } else {
+                deleteCard(targetElement, '.cart_list__likes');//улюблених
+            }
+        }
+
+        else if (targetElement.closest('.our_products .menu_products__item')) {
+            clickTab('our_products', targetElement);
+        } else if (targetElement.closest('.bestdeals .menu_products__item')) {
+            clickTab('bestdeals', targetElement);
+        } else if (targetElement.classList.contains('eye')) {
+            inputEye(targetElement);
+        } else if (targetElement.classList.contains('sing-in')) {
+            singInOpen();
+        } else if (targetElement.closest('.sing-in-registration .menu_circle_close')) {
+            singInClose();
+        } else if (targetElement.classList.contains('sing-in-registration__btn-register') || targetElement.classList.contains('register')) {//Відкриває форму регістрації
+            formRegisterOpen();
+        }
+        else if (targetElement.closest('.header__user .heart')) {//Відкриває форму з карточками уподобань
+            addRemoveClass('.cart_list__likes', 'remove', 'hidden');
+            addRemoveClass('body', 'add', 'overflov-hidden');
+            addRemoveClass('.fon', 'remove', 'hidden');
+        }
+        else if (targetElement.closest('.header__user .cart')) {//Відкриває форму з карточками корзини
+            addRemoveClass('.cart_list__cart', 'remove', 'hidden');
+            addRemoveClass('body', 'add', 'overflov-hidden');
+            addRemoveClass('.fon', 'remove', 'hidden');
+        }
+        else if (targetElement.closest('.cart_list_btn__close')) {
+            addRemoveClass('.cart_list', 'add', 'hidden'); //Закриває форму з карточками корзини
+            addRemoveClass('.cart_list__likes', 'add', 'hidden');//Закриває форму з карточками уподобань
+            addRemoveClass('body', 'remove', 'overflov-hidden');//Відміняє прокручування форми
+            addRemoveClass('.fon', 'add', 'hidden');//забирає фон
+            addRemoveClass('.input_change_time', 'add', 'hidden');//закриває вікно на таймеру
+        }
+        else if (targetElement.closest('.header__user .user')) { //Відкриває форму особистого кабінету
+            addRemoveClass('.user_button', 'remove', 'hidden');
+            addRemoveClass('body', 'add', 'overflov-hidden');
+            addRemoveClass('.fon', 'remove', 'hidden');
+        }
+        else if (targetElement.closest('.user_button_btn__close')) {//Закриває форму особистого кабінету
+            addRemoveClass('.user_button', 'add', 'hidden');
+            addRemoveClass('body', 'remove', 'overflov-hidden');
+            addRemoveClass('.fon', 'add', 'hidden');
+        }
+        // else if (targetElement.closest('.timer')) {//Відкриває форму для настройок таймера
+        //     addRemoveClass('.input_change_time', 'remove', 'hidden');
+        //     document.querySelector('.input_change_time').addEventListener('change', e => changeDate(e));
+        // }
+        else if (catalogLink) { //При кліку на  підменю в каталозі При кліку на меню breadcrumbs
+            if (catalogLink) {
+                console.log('KLIC data-catalog-level')
+                sessionStorage.setItem('catalogs', catalogLink.dataset.catalogs);
+                // sessionStorage.setItem('catalog_00', catalogLink.dataset.catalog_00);
+                // sessionStorage.setItem('catalog_01', catalogLink.dataset.catalog_01);
+                // sessionStorage.setItem('catalog_02', catalogLink.dataset.catalog_02);
+                sessionStorage.setItem('levelCatalog', catalogLink.dataset.level_catalog);
+                sessionStorage.setItem('product_id', catalogLink.dataset.id);
+                // catalogLink.preventDefault();
+                // catalogcreatecard(Number(levelCatalog), [catalog_00, catalog_01, catalog_02], );
+            }
+        }
+        else if (targetElement.closest('.table-category-select .stroka')) {
+            clickTable(targetElement);//При кліку на таблицю selectParametersProducts міняємо чексбокси і радіо кнопки
+        }
+        else if (targetElement.closest('.btn-add-table')) {
+            addTable(targetElement);//При кліку на кнопку в низу таблиці вибрана інформаціє передається в базу даниз shop_category_filter
+        }
+        else if (targetElement.closest('.selected-filter_list .svg-close')) {
+            deleteParametersFilter(targetElement);//При кліку на хрестик filter view удаляє вибрану позицію фільтра
+        }
+        else if (targetElement.closest('.selected-filters_deleted-filters')) {
+            deleteParametersFilterAll(targetElement);//При кліку на хрестик filter view удаляє вибрану позицію фільтра
+        }
+    });
+
+} catch (e) {
+    console.log(e)
+}
 
 
 // http://trygonimetry.smm.zzz.com.ua/shop/filterjson-parameters_new=Серія=WW/
@@ -395,7 +420,7 @@ async function start() {
 
         stratLocalStorage('.cart_list__cart', 'cart');
         stratLocalStorage('.cart_list__likes', 'likes');
-        // getCountLocalStorage();
+        // getCountLimitLocalStorage();
         // setTimeout(() => {
         //     // stratLocalStorage('.cart_list__cart', 'cart');
         //     // stratLocalStorage('.cart_list__likes', 'likes')
@@ -427,7 +452,11 @@ async function start() {
 
         stratLocalStorage('.cart_list__cart', 'cart');
         stratLocalStorage('.cart_list__likes', 'likes');
-        getCountLocalStorage();
+        getCountLimitLocalStorage();
+
+
+
+
     }
 }
 

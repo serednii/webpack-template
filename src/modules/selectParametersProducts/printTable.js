@@ -23,7 +23,6 @@ export function printTable({ nameCategory, params }) {
     <button type="button" class="btn btn-primary btn-add-table">Add</button>
 </div>
     `
-
     tableWrapper && tableWrapper.insertAdjacentHTML('beforeend', tableHtml);
 }
 

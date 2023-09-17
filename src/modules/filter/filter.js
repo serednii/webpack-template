@@ -1,4 +1,6 @@
 
+
+//Selection of the number of cards on the page and sorting by rating, sales and price
 const FILTER_ELEMENTS = document.querySelector('.catalog_products__bottom-sort');
 
 

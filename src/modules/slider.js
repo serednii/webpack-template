@@ -67,14 +67,3 @@ export const startSlider = () => {
         focusOnSelect: true
     });
 }
-
-// $('.slider_deals__cards').slick({
-//     infinite: true,
-//     speed: 1000,
-//     slidesToShow: 3,
-//     slidesToScroll: 1,
-//     // autoplay: true,
-//     autoplaySpeed: 1000,
-//     draggable: true,
-
-// });

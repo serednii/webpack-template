@@ -1,16 +1,11 @@
 {/* <a href="${PRODUCTHTML}" class="card__img"><img class="product-img" src="${el.images_text[0] && el.images_text[0].img} " alt="${el.images[0] && el.images[0].alt}"></a> */ }
 
 import { PRODUCTHTML } from '../GlobalVariable';
-
 function generateCards(data, clases) {
-    // console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
     try {
         const cartListWrapper = document.querySelector(clases);
-        // console.log(data)
+
         data.forEach(el => {
-
-            // console.log(el.category)
-
             const cartItemHTML = ` <li class="card collect_data data-catalog-level" 
             data-catalogs="${el.category && el.category}" 
             data-level_catalog="1000"
@@ -71,7 +66,4 @@ function generateCards(data, clases) {
 
 }
 
-// data-catalog_00="${el.catalog[0]}" 
-// data-catalog_01="${el.catalog[1]}"  
-// data-catalog_02="${el.catalog[2]}" 
 export default generateCards;

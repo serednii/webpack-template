@@ -1,19 +1,12 @@
 
-import { getQuery } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 
 //збираємо з бази даних категорії і формуємо JSON структуру
 async function queryMakeCategory() {
     // Мелкая_бытовая_техника', 'Кухня', 'Кухонные_комбайны'
-
-    let newCategory = {};
-
-    let getQuery = await getQuery(urlJsonServer + 'shop/', '', [], '', 'limit=1000');
+    const newCategory = {};
+    const getQuery = await getQuery(urlJsonServer + 'shop/', '', [], '', 'limit=1000');
     console.log(getQuery);
-
-    // getQuery.forEach(e => console.log(e))
-
-
     let level = new Set();//збираємо всі унікальні імена категорій всіх рівнів
     const level1 = new Set();//збираємо всі унікальні імена категорій першого рівня
     const level2 = new Set();//збираємо всі унікальні імена категорій другого рівня
@@ -46,10 +39,6 @@ async function queryMakeCategory() {
             })
         })
     });
-
-
-    // console.log(newCategory)
-    // console.log(JSON.stringify(newCategory))
 }
 
 export default queryMakeCategory;

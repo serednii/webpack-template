@@ -1,9 +1,5 @@
 export function printTable({ nameCategory, params }) {
-    console.log(nameCategory)
-    console.log(params)
     nameCategory = nameCategory.replace(/---/g, ' ');
-    console.log(nameCategory)
-
     const tableWrapper = document.querySelector('.table-category-select')
     const tableHtml = `
     <div  class="table-category-select_parent">
@@ -25,9 +21,7 @@ export function printTable({ nameCategory, params }) {
     `
     tableWrapper && tableWrapper.insertAdjacentHTML('beforeend', tableHtml);
 }
-
 //формуємо строку
-
 
 export function getTRHtml(params) {
     let count = 1;

@@ -23,13 +23,7 @@ const optimization = () => {
 
 
 module.exports = {
-  plugins: [
-    new NodePolyfillPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
-    ...globHtmlFiles(),
-  ],
+  plugins: [new NodePolyfillPlugin()],
   mode,
   target,
   devtool,
@@ -43,11 +37,29 @@ module.exports = {
       util: require.resolve("util/")
     }
   },
+  // entry: path.resolve(__dirname, 'src', 'index.js'),
+  // output: {
+  //   path: path.resolve(__dirname, 'dist'),
+  //   clean: true,
+  //   filename: '[name].[contenthash].js',
+  //   assetModuleFilename: 'assets/[name][ext]',
+  // },
+  // entry: path.resolve(__dirname, 'src', 'catalog.js'),
+  // output: {
+  //   path: path.resolve(__dirname, 'dist'),
+  //   clean: true,
+  //   filename: 'catalog.[contenthash].js',
+  //   assetModuleFilename: 'assets/catalog[ext]',
+  // },
   entry: {
     index: {
       import: './src/index.js',
       dependOn: 'shared',
     },
+    // another: {
+    //   import: './src/catalog.js',
+    //   dependOn: 'shared',
+    // },
     shared: 'lodash',
   },
   output: {
@@ -57,7 +69,35 @@ module.exports = {
 
 
   optimization: optimization(),//Для того щоб код jquery був в окремому файлі
+  plugins: [
 
+    // new HtmlWebpackPlugin({
+    //   template: (__dirname, 'src', 'about.html'),
+    // }),
+
+    // new HtmlWebpackPlugin({
+    //   template: path.resolve(__dirname, 'src', 'index.html'),
+    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'catalog.html',
+      template: './src/catalog.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'product.html',
+      template: './src/product.html'
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    // new CopyPlugin({
+    //   patterns: [{ from: 'static', to: './' }],
+    // }),
+  ],
   module: {
     rules: [
       {
@@ -139,6 +179,21 @@ module.exports = {
     ],
   },
 };
+
+// function globHtmlFiles() {
+//   const glob = require('glob');
+
+//   const htmlFiles = glob.sync('./src/**/*.html');
+//   // console.log(htmlFiles)
+//   return htmlFiles.map((file) => {
+//     // console.log(file)
+//     return new HtmlWebpackPlugin({
+//       filename: path.basename(file), // Встановлюємо ім'я файлу як ім'я вихідного HTML файлу
+//       template: file,
+//     });
+//   });
+// }
+
 
 function globHtmlFiles() {
   const htmlFiles = glob.sync('./src/**/*.html');

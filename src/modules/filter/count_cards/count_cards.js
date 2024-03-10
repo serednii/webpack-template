@@ -15,9 +15,6 @@ COUNT_ELEMENTS && COUNT_ELEMENTS.addEventListener('change', (e) => countElements
 
 async function countElementsChange() {
     const SHOW_LIST = document.querySelector('.search-product__off .catalog_product-grid');
-    // console.log(COUNT_ELEMENTS.selectedOptions[0].innerText);
-    // console.log(COUNT_ELEMENTS.selectedIndex);
-    // console.log(COUNT_ELEMENTS.value);
     const COUNT_INDEX = COUNT_ELEMENTS.selectedOptions[0].innerText;
     setCountLocalStorage(COUNT_INDEX);
     const catalogs = (SHOW_LIST.dataset.catalogs).split(' ');

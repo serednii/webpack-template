@@ -6,7 +6,6 @@ import printCard from "./printCard";
 import { getQuery, transformData, allDataSearch } from "../fetch/fetch";
 import { getCountLimitLocalStorage } from '../filter/count_cards/count_cards';
 
-// let page = 0;
 
 async function catalogCreateCard(LevelCatalog, catalogs, categoryList) {
     console.log(catalogs)
@@ -33,11 +32,3 @@ async function catalogCreateCard(LevelCatalog, catalogs, categoryList) {
 }
 
 export default catalogCreateCard;
-
-// async function getData() {
-//     let response = await fetch(urlSearch)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data)
-//         })
-// }

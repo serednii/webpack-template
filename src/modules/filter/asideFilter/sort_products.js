@@ -5,19 +5,13 @@ import { asideFilterRange } from './aside_filter';
 export async function createFormsSort(menuPatch) {
     try {
         const PRODUCT = menuPatch.join('---')//Із масива робимо строку розділену ---
-
-        // console.log(PRODUCT);
-
         let categoryListFilter = await getQuery(urlJsonServer + 'shop_category_filter/', 'product_filters', [PRODUCT], '', '');
-
         console.log(categoryListFilter)
         if (categoryListFilter.data) {
             categoryListFilter = categoryListFilter.data[0];
             categoryListFilter.filter = JSON.parse(categoryListFilter.filter);
             categoryListFilter.id = categoryListFilter.id;
-            // console.log(categoryListFilter.filter);
             const listFilter = Object.keys(categoryListFilter.filter);
-
             listFilter.forEach(nameFilter => {
                 if (categoryListFilter.filter[nameFilter][0] === 'checkbox') createFormSortCheckbox(nameFilter, categoryListFilter.filter[nameFilter]);
                 if (categoryListFilter.filter[nameFilter][0] === 'range') createFormSortRange(nameFilter, categoryListFilter.filter[nameFilter]);
@@ -55,7 +49,6 @@ export function createFormSortCheckbox(nameFilter, menuPatch) {
 }
 
 
-// let mySlider;
 
 export function createFormSortRange(nameFilter, menuPatch) {
     console.log(menuPatch)
@@ -84,8 +77,6 @@ export function createFormSortRange(nameFilter, menuPatch) {
         to: 500,
         grid: true,
         onChange: function (values) {
-            // console.log(values);
-            // console.log(values.input);
             asideFilterRange(values);
         },
         onUpdate: function (values) {

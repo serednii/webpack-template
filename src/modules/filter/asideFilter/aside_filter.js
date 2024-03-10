@@ -69,7 +69,6 @@ export async function asideFilterRange(values) {
 }
 
 export async function deleteParametersFilter(e) {//Видаляє доавлені фільтри в топі над списком по одному
-    // try {
     const catalogsArray = sessionStorage.getItem('catalogs').split(' ');
     const numDeleteElement = e.closest('.selected-filter_list').querySelector('.selected-filter_list_content').dataset.num
     state.arraySelectElements.splice(numDeleteElement, 1)[0].checked = false;
@@ -79,14 +78,9 @@ export async function deleteParametersFilter(e) {//Видаляє доавлен
     printTopFilterSelectedHTML(result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
     result = result.slice(0, getCountLimitLocalStorage());
     printCard(convertObjectToInArray(result, new Array()), catalogsArray, '.search-product__off .catalog_product-grid');
-    // console.log(state.arraySelectElements)
-    // } catch (e) {
-    //     console.log(e);
-    // }
 }
 
 export async function deleteParametersFilterAll(e) {//Видаляє доавлені фільтри в топі над списком всі
-    // try {
     const catalogsArray = sessionStorage.getItem('catalogs').split(' ');
     state.arraySelectElements.forEach(e => e.checked = false)
     state.arraySelectElements.splice(0, state.arraySelectElements.length);
@@ -97,10 +91,6 @@ export async function deleteParametersFilterAll(e) {//Видаляє доавл�
     printTopFilterSelectedHTML(state.arraySelectElements, result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
     result = result.slice(0, getCountLimitLocalStorage());
     printCard(convertObjectToInArray(result, new Array()), catalogsArray, '.search-product__off .catalog_product-grid');
-    // console.log(state.arraySelectElements)
-    // } catch (e) {
-    //     console.log(e);
-    // }
 }
 
 function addChangElementToArray(values) {
@@ -132,7 +122,6 @@ function addDeleteElementToArray(target) {
 
 export function createQuery(target) {
     console.log(state.arraySelectElementValue)
-    // try {
     const catalogsString = sessionStorage.getItem('catalogs');
     let filter = `SELECT * FROM shop  WHERE category LIKE '%${catalogsString}%'`;
     let jsonFilter = ``;
@@ -144,14 +133,11 @@ export function createQuery(target) {
             if (titleValue && value) {
                 (jsonFilter += `JSON_VALUE(parameters_new, '$[0].${titleValue}' ) LIKE '%${value}%' OR `);
             } else {
-                // throw 'ERROR FILTER'
             }
         } else if (typeof state.arraySelectElementValue[i] === 'object') {
             const titleValue = e.querySelector('.js-range-slider_title')?.innerText
             const from = state.arraySelectElementValue[i].from;
             const to = state.arraySelectElementValue[i].to;
-            // const formParent = e.querySelector('.js-range-slider_title');
-            // const title = formParent && formParent.querySelector('.form-check_title');
             if (titleValue === 'newPrice') {
                 titleValue && from && to && (rangeFilter = `(${titleValue} >= ${from} AND ${titleValue}  <= ${to})`);
             }
@@ -167,39 +153,22 @@ export function createQuery(target) {
         filter += ' AND ' + rangeFilter + ' ' + jsonFilter
     }
     return filter;
-
-    // } catch (e) {
-    //     throw e
-    //     // console.log(e)
-    // }
 }
 
 async function getQueryFilter(catalogsArray, target) {//повертає відфільтрований запрос
 
     return new Promise(async (resolve, rejeckt) => {
-        // try {
         let result;
         if (state.arraySelectElements.length === 0) {//Якщо немає фільтрів
             result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogsArray, null, null));
 
-            // result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogsArray, null, 'limit=' + getCountLimitLocalStorage()));
             const newSetParameters = generateObject(result);
         } else {
             result = transformData({ data: await postQuery(urlJsonServer + 'shop/', JSON.stringify([{ select: createQuery(target) }])) });
         }
         resolve(result);
-        // } catch (error) {
-        //     // console.log(error)
-        //     rejeckt(error)
-        // }
-
-
-
-        // console.log(result)
 
     })
-    // const resolve_1 = await promise;
-    // return resolve_1;
 }
 
 
@@ -257,9 +226,6 @@ async function changingFilters(result, catalogsArray, target) {
 
     })
 
-    // } catch (e) {
-    //     console.log(e)
-    // }
 }
 
 

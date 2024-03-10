@@ -4,27 +4,15 @@ import printElementHtml from './printElementHtml';
 import { startSlider } from '../slider';
 import { getQuery, transformData } from '../fetch/fetch';
 async function productCreateCart(catalogs, product_id) {
-    console.log(product_id)
-    //Робимо запит в базу даних
-    // fetch(`http://trygonimetry.smm.zzz.com.ua/shop`)
-    //     // fetch(`${urlJsonServer}`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    // console.log(product_id)
-    let product = transformData(await getQuery(urlJsonServer + 'shop/', '', [product_id]));
-    console.log(...product)
+    const product = transformData(await getQuery(urlJsonServer + 'shop/', '', [product_id]));
     product = product[0];
-    console.log(catalogs)
     product = Object.assign(product, ...JSON.parse(product.parameters_new))
-    console.log(product)
     printBreadCrumbs(1000, catalogs);
 
 
     const productAboutMain = document.querySelector('.product_about-main.collect_data');
     if (productAboutMain) {
         productAboutMain.dataset.id = product.id;
-        console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-        console.log(product.category);
         productAboutMain.dataset.catalogs = product.category;
     }
 
@@ -38,7 +26,7 @@ async function productCreateCart(catalogs, product_id) {
     printProductPrice(product);
     printParametrElement(product);
     startSlider();
-    // })
+
 }
 
 function printProductPrice(product) {

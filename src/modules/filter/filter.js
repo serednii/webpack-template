@@ -14,10 +14,8 @@ function filter(e) {
     const SORT_INDEX = FILTER_ELEMENTS.selectedIndex;
     const SHOW_LIST = document.querySelector('.catalog_product-grid');
     const CARDS = Array.prototype.slice.call(document.querySelectorAll('.catalog_product-grid .catalog_product-grid_cart'));
-    // console.log(CARDS)
     CARDS.forEach(e => {
         const cena = e.dataset.price;
-        // console.log(cena);
     })
 
     CARDS.sort((a, b) => {
@@ -39,7 +37,6 @@ function filter(e) {
     })
     SHOW_LIST.innerHTML = '';
 
-    // console.log(CARDS);
 
     CARDS.forEach(e => {
         const cena = e.querySelector('.catalog_product-price-value.cena').innerText;
@@ -47,35 +44,3 @@ function filter(e) {
     })
 
 }
-
-
-
-// const items = [
-//     { name: "Edward", value: 21 },
-//     { name: "Sharpe", value: 37 },
-//     { name: "And", value: 45 },
-//     { name: "The", value: -12 },
-//     { name: "Magnetic", value: 13 },
-//     { name: "Zeros", value: 37 },
-// ];
-
-
-
-
-
-// async function sss() {
-//     console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII')
-//     console.log(items)
-//     await sorttt();
-//     console.log(items)
-// }
-
-// function sorttt() {
-//     return new Promise(resolve => {
-//         items.sort((a, b) => a.value - b.value);
-//         resolve();
-//     });
-
-// }
-
-// sss();

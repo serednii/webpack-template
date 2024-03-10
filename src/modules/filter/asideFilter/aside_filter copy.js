@@ -8,13 +8,12 @@ import convertObjectToInArray from "../../function/convertObjectToInArray";
 import printTopFilterSelectedHTML from "./view";
 import { generateObject } from "../../selectParametersProducts/generateObjeckt";
 import { state } from "../../state/state";
-import { createFormSortCheckbox, createFormSortRange } from "./sort_products";
-// import { remove } from "cherio/lib/api/manipulation";
+
 const catalogProductFilterParent = document.querySelector('.catalog_product-filter_parent');
+
 catalogProductFilterParent && catalogProductFilterParent.addEventListener('change', (e) => asideFilter(e.target));
 catalogProductFilterParent && catalogProductFilterParent.addEventListener('mousedown', (e) => {
     console.log('mouseDown')
-    // console.log(e.target)
     const formCheckedParent = e.target.closest('.form-checked_parent');
     if (formCheckedParent.classList.contains('form-checked_parent')) {
         console.log(formCheckedParent)
@@ -25,14 +24,12 @@ catalogProductFilterParent && catalogProductFilterParent.addEventListener('mouse
 
 catalogProductFilterParent && catalogProductFilterParent.addEventListener('mouseup', (e) => {
     console.log('mouseup')
-    // console.log(e.target)
     const formCheckedParent = e.target.closest('.form-checked_parent');
     if (formCheckedParent.classList.contains('form-checked_parent')) {
         console.log(formCheckedParent)
         state.flagRangeSlider = 2
         state.rangeSliderMouseUpTarget = formCheckedParent;
     }
-    // asideFilterRange(e.target);
 });
 
 
@@ -50,14 +47,9 @@ export async function asideFilter(target) {
     console.log(target.value);
 
     const catalogsArray = sessionStorage.getItem('catalogs').split(' ');//Получаємо шлях меню категорій і розбиваємо на масив
-    // console.log(catalogsArray)
     addDeleteElementToArray(target)//Провіряємо вибраний або зняттий з фільтра елемент в масив state.arraySelectElements
-    // console.log(state.arraySelectElements)
-    // console.log(createQuery())
     let result = await getQueryFilter(catalogsArray, target);
-    // console.log(result)
     changingFilters(result, catalogsArray, target);
-    // console.log(result)
     printTopFilterSelectedHTML(result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
     result = result.slice(0, getCountLimitLocalStorage());
     printCard(convertObjectToInArray(result, new Array()), catalogsArray, '.search-product__off .catalog_product-grid');
@@ -78,9 +70,6 @@ export async function asideFilterRange(values) {
         let result = await getQueryFilter(catalogsArray);
         changingFilters(result, catalogsArray);
 
-        // console.log(result);
-        // console.log(result.length);
-
         console.log(state);
         printTopFilterSelectedHTML(result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
         result = result.slice(0, getCountLimitLocalStorage());
@@ -91,13 +80,10 @@ export async function asideFilterRange(values) {
         console.log(state.arraySelectElementValue)
         console.log('************************************************************************')
     }
-    // // console.log(result)
 }
 
 export async function deleteParametersFilter(e) {//Видаляє доавлені фільтри в топі над списком по одному
-    // try {
     const catalogsArray = sessionStorage.getItem('catalogs').split(' ');
-    // console.log(e.closest('.selected-filter_list').querySelector('.selected-filter_list_content').dataset.num)
     const numDeleteElement = e.closest('.selected-filter_list').querySelector('.selected-filter_list_content').dataset.num
     state.arraySelectElements.splice(numDeleteElement, 1)[0].checked = false;
     state.arraySelectElementValue.splice(numDeleteElement, 1);
@@ -107,22 +93,14 @@ export async function deleteParametersFilter(e) {//Видаляє доавлен
     console.log(state.arraySelectElementValue)
     console.log('************************************************************************')
 
-    // console.log(t)
     let result = await getQueryFilter(catalogsArray)
     printTopFilterSelectedHTML(result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
     result = result.slice(0, getCountLimitLocalStorage());
     printCard(convertObjectToInArray(result, new Array()), catalogsArray, '.search-product__off .catalog_product-grid');
-    // console.log(state.arraySelectElements)
-    // } catch (e) {
-    //     console.log(e);
-    // }
 }
 
 export async function deleteParametersFilterAll(e) {//Видаляє доавлені фільтри в топі над списком всі
-    // try {
     const catalogsArray = sessionStorage.getItem('catalogs').split(' ');
-    // console.log(e.closest('.selected-filter_list').querySelector('.selected-filter_list_content').dataset.num);
-    // const numDeleteElement = e.closest('.selected-filter_list').querySelector('.selected-filter_list_content').dataset.num;
     state.arraySelectElements.forEach(e => e.checked = false)
     state.arraySelectElements.splice(0, state.arraySelectElements.length);
     state.arraySelectElementValue.splice(0, state.arraySelectElementValue.length);
@@ -136,10 +114,7 @@ export async function deleteParametersFilterAll(e) {//Видаляє доавл�
     printTopFilterSelectedHTML(state.arraySelectElements, result.length);//Друкуємо вибрані запроси в окремий рядок другим параметром передаємо 0, що означає немає заппросів і строку з запросами видалити
     result = result.slice(0, getCountLimitLocalStorage());
     printCard(convertObjectToInArray(result, new Array()), catalogsArray, '.search-product__off .catalog_product-grid');
-    // console.log(state.arraySelectElements)
-    // } catch (e) {
-    //     console.log(e);
-    // }
+
 }
 
 function addChangElementToArray(values) {
@@ -159,9 +134,6 @@ function addChangElementToArray(values) {
 }
 
 function addDeleteElementToArray(target) {
-    // console.log(target)
-    // console.log(state)
-    // debugger
     if (target.checked) {//Провіряємо вибраний або зняттий з фільтра елемент в масив state.arraySelectElements
         if (!state.arraySelectElements.includes(target)) {
             state.arraySelectElements.unshift(target);//Добавляємо вибраний елемент з фільтра якщо нема
@@ -174,7 +146,6 @@ function addDeleteElementToArray(target) {
             state.arraySelectElementValue.splice(number, 1)//Видаляємо знятий елемент з фільтра якщо є
         }
     }
-    // console.log(state)
 }
 
 export function createQuery(target) {
@@ -224,51 +195,21 @@ export function createQuery(target) {
         console.log('sonFilter || rangeFilter')
     }
     return filter;
-
-    // jsonFilter = jsonFilter.replace(/OR $/, ")");
-
-    // else
-    // filter.replace(/(AND )$/, ")");
-    // } catch (e) {
-    //     throw e
-    //     // console.log(e)
-    // }
 }
 
 async function getQueryFilter(catalogsArray, target) {//повертає відфільтрований запрос
 
     return new Promise(async (resolve, rejeckt) => {
-        // try {
         let result;
         if (state.arraySelectElements.length === 0) {//Якщо немає фільтрів
             result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogsArray, null, null));
-
-            // result = transformData(await getQuery(urlJsonServer + 'shop/', 'category', catalogsArray, null, 'limit=' + getCountLimitLocalStorage()));
             const newSetParameters = generateObject(result);
             console.log(newSetParameters);
         } else {
             result = transformData({ data: await postQuery(urlJsonServer + 'shop/', JSON.stringify([{ select: createQuery(target) }])) });
-            // debugger
-            // createQuery1(result, catalogsArray, target);
-            // listFilter.forEach(nameFilter => {
-            //     // console.log(newObj[nameFilter])
-            //     // if (newObj[nameFilter][0] === 'checkbox') createFormSortCheckbox(nameFilter, newObj[nameFilter]);
-            //     // if (newObj[nameFilter][0] === 'range') createFormSortRange(nameFilter, newObj[nameFilter]);
-            // })
         }
         resolve(result);
-        // } catch (error) {
-        //     // console.log(error)
-        //     rejeckt(error)
-        // }
-
-
-
-        // console.log(result)
-
     })
-    // const resolve_1 = await promise;
-    // return resolve_1;
 }
 
 
@@ -290,7 +231,6 @@ async function changingFilters(result, catalogsArray, target) {
         if (!key_setParametrs.includes(e)) {
             delete newSetParameters[e]
         } else {
-            // newSetParameters[e] = [...Array.from(newSetParameters[e])];
             if (categoryListFilter[e][0] === 'range') {
                 newSetParameters[e] = categoryListFilter[e]
             }
@@ -298,23 +238,6 @@ async function changingFilters(result, catalogsArray, target) {
     })
 
     console.log(newSetParameters)
-    //         // if (categoryListFilter[key][0] === 'range') {
-    //         //     const min = newObj[key][1];
-    //         //     const max = newObj[key][newObj[key].length - 1];
-    //         //     let minV = (((max - min) * 0.2) + min).toFixed(2);
-    //         //     let maxV = (((max - min) * 0.6) + min).toFixed(2);
-    //         //     if (Number.isInteger(min)) {
-    //         //         minV = parseInt(minV);
-    //         //         maxV = parseInt(maxV);
-    //         //     }
-    //         //     newObj[key] = ['range', min, max, minV, maxV];
-    //         // }
-    //     }
-    //     // console.log(newSetParameters[key])
-    // }
-    // console.log(newObj)
-    // const listFilter = Object.keys(newObj);
-    // console.log(listFilter)
 
     //Показує або скриває параметри фільтра в меню
     const parentChangeTitle = target?.closest('.form-checked_parent')?.querySelector('.form-check_title')?.innerText.trim();
@@ -335,59 +258,4 @@ async function changingFilters(result, catalogsArray, target) {
 
     })
 
-    // } catch (e) {
-    //     console.log(e)
-    // }
 }
-
-
-
-
-
-// function showHiddenParametersFilter(newSetParameters, key_setParametrs, target) {
-    // const parentChangeTitle = target?.closest('.form-checked_parent')?.querySelector('.form-check_title')?.innerText.trim();
-
-//     const formCheckedParent = catalogProductFilterParent?.querySelectorAll('.form-checked_parent')
-//     console.log(formCheckedParent)
-//     // debugger
-//     formCheckedParent && formCheckedParent.forEach(parentFilter => {
-//         const title = (parentFilter && parentFilter.querySelector('.form-check_title')?.innerText).trim();
-//         // if (key_setParametrs.includes(title))//Якщо в новому списку є назва фільтру що є на екрані
-//         //     if (newSetParameters[title][0] === 'range') {
-//         //         console.log('input')
-
-//         //         // input.dataset.min = newObj[title][1]
-//         //         // input.dataset.max = newObj[title][2]
-//         //         // input.dataset.from = newObj[title][3]
-//         //         // input.dataset.to = newObj[title][4]
-//         //         // const menuPatch = newObj[title].shift();
-//         //         // console.log(menuPatch);
-//         //         // createFormSortRange('nameFilter', menuPatch)
-
-//         //         // $(".js-range-slider").ionRangeSlider({
-//         //         //     type: "double",
-//         //         //     min: newObj[title][1],
-//         //         //     max: newObj[title][2],
-//         //         //     from: newObj[title][3],
-//         //         //     to: newObj[title][4],
-//         //         //     grid: true
-//         //         // });
-
-//         //     } else
-//             if (newSetParameters[title][0] = 'checkbox' && title !== parentChangeTitle) {
-//                 const valuesFilter = parentFilter?.querySelectorAll('.form-check')//Вибираємо всі значення із фільтра
-//                 // debugger
-//                 console.log(valuesFilter)
-//                 valuesFilter && valuesFilter.forEach(el => {//
-//                     const elInput = el.querySelector('.form-check-input');
-//                     if (newSetParameters[title].includes(elInput.value.trim())) {//Якщо фільтра немає в новому списку то його скриваємо
-//                         el.classList.remove('hidden');
-//                     } else {
-//                         el.classList.add('hidden');
-//                     }
-//                 })
-//             }
-
-//     })
-// }
-

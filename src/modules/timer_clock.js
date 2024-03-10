@@ -1,6 +1,6 @@
 
-function getTimeRemaining(endtime) {
-    var t = Date.parse(endtime) - Date.parse(new Date());
+function getTimeRemaining(endTime) {
+    var t = Date.parse(endTime) - Date.parse(new Date());
     var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
@@ -14,7 +14,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function initializeClock(id, endtime) {
+function initializeClock(id, endTime) {
     var clock = document.getElementById(id);
     if (!clock) return
     var daysSpan = clock.querySelector('.days');
@@ -22,7 +22,7 @@ function initializeClock(id, endtime) {
     var minutesSpan = clock.querySelector('.minutes');
     var secondsSpan = clock.querySelector('.seconds');
     function updateClock() {
-        var t = getTimeRemaining(endtime);
+        var t = getTimeRemaining(endTime);
         daysSpan.innerHTML = t.days;
         hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);

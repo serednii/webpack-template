@@ -1,6 +1,5 @@
 // ***************************************************************************
 import { CATALOGHTML } from '../GlobalVariable';
-// import {  getQuery, transformData } from '../fetch/fetch';
 import { urlJsonServer } from '../GlobalVariable';
 import { createFormsSort } from '../filter/asideFilter/sort_products';
 

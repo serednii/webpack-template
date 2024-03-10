@@ -3,7 +3,6 @@ import { isSet } from "./isSet";
 export const newPrice = (obj, k, newObject) => {//obj, k, newObject
     const temp = new Set();
     obj[k] = Number(obj[k])
-    // console.log(e[k])
     if (isSet(newObject[k])) {
         let arr = ([...Array.from(newObject[k]), obj[k]])
         // console.log(arr)
@@ -14,7 +13,6 @@ export const newPrice = (obj, k, newObject) => {//obj, k, newObject
     } else {
         temp.add(obj[k]);
     }
-    // console.log(temp)
     return temp;
 }
 
@@ -35,9 +33,7 @@ export const nozzles = (obj, k, newObject) => {
     const temp = new Set();
     if (isSet(newObject[k])) {
         let arr = ([...Array.from(newObject[k]), ((obj[k]))])//
-        // console.log(arr)
         arr = arr.join(',').split(',');
-
         arr.forEach(m => {
             temp.add(m.trim());
         });

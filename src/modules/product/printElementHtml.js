@@ -1,5 +1,5 @@
-function printElementHtml(classs, element) {
-    const objectElementHtml = document.querySelector(classs);
+function printElementHtml(className, element) {
+    const objectElementHtml = document.querySelector(className);
     if (objectElementHtml) objectElementHtml.insertAdjacentHTML('beforeend', element);
 }
 export default printElementHtml;

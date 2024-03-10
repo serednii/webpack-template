@@ -4,11 +4,9 @@ function printCard(objectData, catalogs, clases) {
     const cartListWrapper = document.querySelector(clases);
     console.log('555555555555555555555555555');
 
-    // console.log(objectData);
     console.log(catalogs);
 
     if (!cartListWrapper) return
-    // const elements = cartListWrapper.querySelectorAll('.catalog_product-grid_cart');
     // if (elements) elements.forEach(e => e.remove());//якщо є картки то видаляємо
     cartListWrapper && (cartListWrapper.innerHTML = '');
     cartListWrapper && (cartListWrapper.dataset.catalogs = catalogs.join(' '));
@@ -105,8 +103,3 @@ function printCard(objectData, catalogs, clases) {
 // ***************************************************************************
 
 export default printCard;
-
-
-// data-catalog_00="${el.catalog[0]}"
-// data-catalog_01="${el.catalog[1]}"
-// data-catalog_02="${el.catalog[2]}" 

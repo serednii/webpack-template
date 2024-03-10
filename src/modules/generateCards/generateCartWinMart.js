@@ -29,7 +29,5 @@ function generateCartsWinMart(data, clases, count) {
         console.error(e)
     }
 }
-// data-catalog_00="${data[i].catalog[0]}" 
-// data-catalog_01="${data[i].catalog[1]}"  
-// data-catalog_02="${data[i].catalog[2]}" 
+
 export default generateCartsWinMart;

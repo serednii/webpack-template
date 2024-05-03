@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const glob = require('glob');
+const webpack = require('webpack'); // Добавлено
 // const FileIncludeWebpackPlugin = require('file-include-webpack-plugin')
 // const CopyPlugin = require('copy-webpack-plugin');
 
@@ -25,6 +26,10 @@ const optimization = () => {
 
 module.exports = {
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
     new NodePolyfillPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
@@ -40,6 +45,10 @@ module.exports = {
     hot: true,
   },
   resolve: {
+    alias: {
+      $: path.resolve('node_modules', 'jquery/src/jquery'),
+      jquery: path.resolve('node_modules', 'jquery/src/jquery'),
+    },
     fallback: {
       util: require.resolve("util/")
     }

@@ -1,41 +1,20 @@
-@import "~ion-rangeslider/css/ion.RangeSlider";
-@import "~slick-carousel/slick/slick";
-@import "~slick-carousel/slick/slick-theme.css";
-@import "~jquery-form-styler/dist/jquery.formstyler.css";
-@import "../node_modules/jquery-form-styler/dist/jquery.formstyler.theme.css";
-@import 'style/normalize.css';
-@import 'style/selected_filters.scss';
-@import 'style/fonts';
-@import 'style/var';
-@import 'style/style';
-@import 'style/header.scss';
-@import 'style/top_slider.scss';
-@import 'style/arrivals.scss';
-@import 'style/slider_deals.scss';
-@import 'style/our_products.scss';
-@import 'style/best_deals.scss';
-@import 'style/winmart.scss';
-@import 'style/new_arrivals__buttom.scss';
-@import 'style/sale_products.scss';
-@import 'style/user_button.scss';
-@import 'style/cart_list.scss';
-@import 'style/form_sing-in.scss';
-@import 'style/footer.scss';
-@import 'style/catalog_products.scss';
-@import 'style/filter-products.scss';
-@import 'style/catalog_product.scss';
-@import 'style/product.scss';
-@import 'style/component/components.scss';
-@import 'style/filter_form.scss';
-@import 'style/component/range.scss';
+// @import "~ion-rangeslider/css/ion.RangeSlider";
+// @import "~slick-carousel/slick/slick";
+// @import "~slick-carousel/slick/slick-theme.css";
+// @import "~jquery-form-styler/dist/jquery.formstyler.css";
+// @import "../node_modules/jquery-form-styler/dist/jquery.formstyler.theme.css";
+// @import 'style/normalize.css';
+
+// @import 'style/fonts';
+// @import 'style/var';
+// @import 'style/style';
 
 
-
-.overflov-hidden {
+.overflow-hidden {
     overflow: hidden;
 }
 
-.show_tabcontent {
+.show_tabContent {
     display: grid !important;
 }
 
@@ -45,133 +24,4 @@
 
 .red-color {
     color: red !important;
-}
-
-.resize {
-    position: fixed;
-    padding: 15px;
-    top: 900px;
-    left: 50px;
-    width: 200px;
-    height: 150px;
-    border-radius: 25px;
-    background-color: black;
-    color: aliceblue;
-    font-size: 1rem;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    -ms-border-radius: 25px;
-    -o-border-radius: 25px;
-}
-
-.rang_may_slider {
-    position: fixed;
-    padding: 15px;
-    top: 900px;
-    left: 50px;
-    width: 500px;
-    height: 20px;
-    z-index: 1000;
-
-    input {
-        appearance: slider-vertical;
-    }
-}
-
-// .c-rate {
-//     position: fixed;
-//     padding: 15px;
-//     top: 600px;
-//     left: 50px;
-//     width: 500px;
-//     height: 20px;
-//     z-index: 1000;
-// }
-
-.star-rating {
-    position: fixed;
-    padding: 15px;
-    top: 900px;
-    left: 50px;
-    width: 500px;
-    height: 20px;
-    z-index: 1000;
-    // display: flex;
-    display: none;
-    justify-content: center;
-    gap: 4px;
-}
-
-.c-star {
-    width: var(--size, 32px);
-    height: var(--size, 32px);
-    fill: lightgrey;
-
-    &.active {
-        fill: #fed94b;
-    }
-}
-
-#clearcountelement_parent {
-    width: 112px;
-    line-height: 2.5;
-    min-height: 2.5rem;
-    position: fixed;
-    z-index: 300;
-    color: aliceblue;
-    background-color: brown;
-    text-align: center;
-}
-
-.clearcountelement {
-
-    line-height: 2.5;
-    min-height: 2.5rem;
-    z-index: 300;
-    color: aliceblue;
-    background-color: brown;
-    text-align: center;
-}
-
-
-
-
-
-// table category select
-.table-category-select {
-    background-color: coral;
-    z-index: 1000;
-    position: relative;
-    padding: 20px;
-}
-
-.table-category-select_checkbox {
-    width: 50px;
-    height: 20px;
-}
-
-.table-category-select_title {
-    color: black;
-    font-size: 2rem;
-}
-
-.table-category-select_wrapper {
-    // width: 80%;
-    // margin-bottom: 20px;
-}
-
-table {
-    caption-side: top !important;
-    border-collapse: initial !important;
-}
-
-.table-category-select_key {
-    // width: 600px !important;
-}
-
-.table-category-select_value {
-    padding: 0 20px;
-    max-width: 808px;
-    width: 100%;
-    word-wrap: break-word;
 }

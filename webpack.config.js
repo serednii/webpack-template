@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const glob = require('glob');
+// const FileIncludeWebpackPlugin = require('file-include-webpack-plugin')
 // const CopyPlugin = require('copy-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -142,11 +143,14 @@ module.exports = {
 
 function globHtmlFiles() {
   const htmlFiles = glob.sync('./src/**/*.html');
-
   return htmlFiles.map((file) => {
+    console.log(file)
     return new HtmlWebpackPlugin({
       filename: path.basename(file), // Встановлюємо ім'я файлу як ім'я вихідного HTML файлу
       template: file,
     });
+
   });
 }
+
+

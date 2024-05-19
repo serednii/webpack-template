@@ -2,39 +2,40 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const FileIncludeWebpackPlugin = require('file-include-webpack-plugin');
 const glob = require('glob');
-const webpack = require('webpack'); // Добавлено
-// const FileIncludeWebpackPlugin = require('file-include-webpack-plugin')
-// const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
 const devtool = devMode ? 'source-map' : undefined;
 
-
-//Для того щоб код jquery був в окремому файлі
+// Для того щоб код jquery був в окремому файлі
 const optimization = () => {
   const config = {
     splitChunks: {
-      chunks: 'all'
-    }
-  }
-  return config
-}
-
+      chunks: 'all',
+    },
+  };
+  return config;
+};
 
 module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new NodePolyfillPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
     ...globHtmlFiles(),
+    new FileIncludeWebpackPlugin({
+      source: './src', // Убедитесь, что этот путь правильный
+      replace: [], // Пустой массив для предотвращения ошибки
+    }),
   ],
   mode,
   target,
@@ -50,8 +51,8 @@ module.exports = {
       jquery: path.resolve('node_modules', 'jquery/src/jquery'),
     },
     fallback: {
-      util: require.resolve("util/")
-    }
+      util: require.resolve('util/'),
+    },
   },
   entry: {
     index: {
@@ -64,10 +65,7 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-
-
-  optimization: optimization(),//Для того щоб код jquery був в окремому файлі
-
+  optimization: optimization(),
   module: {
     rules: [
       {
@@ -99,7 +97,6 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.woff2?$/i,
         type: 'asset/resource',
@@ -153,13 +150,9 @@ module.exports = {
 function globHtmlFiles() {
   const htmlFiles = glob.sync('./src/**/*.html');
   return htmlFiles.map((file) => {
-    console.log(file)
     return new HtmlWebpackPlugin({
       filename: path.basename(file), // Встановлюємо ім'я файлу як ім'я вихідного HTML файлу
       template: file,
     });
-
   });
 }
-
-
